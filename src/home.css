@@ -1,0 +1,14 @@
+body {
+    background-size: contain;
+}
+
+.top {
+    background-color: #34626c;
+    font-family: 'Roboto Mono', monospace;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.loginhere {
+    margin: 50px;
+}

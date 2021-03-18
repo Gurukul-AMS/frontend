@@ -1,0 +1,46 @@
+.info {
+    margin: 100px 200px;
+    background-color: #30475e;
+    border-radius: 40px;
+}
+
+.dp {
+    height: 120px;
+    width: 120px;
+    margin: 50px 20px auto 20px;
+}
+
+.title1 {
+    margin-top: 25px;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.title2 {
+    margin: 25px auto;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.icon {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.edit {
+    margin: 100px 200px;
+    background-color: #30475e;
+    border-radius: 40px;
+}
+
+.seen {
+    display: none;
+}
+
+.ugly {
+    width: 50px;
+    height: 50px;
+    margin: 12px auto auto 12px;
+    
+}

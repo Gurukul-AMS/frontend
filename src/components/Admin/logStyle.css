@@ -1,0 +1,26 @@
+.log {
+    text-align: center;
+    background-color: rgb(56, 53, 53);
+    border: 5px solid #efefef;  
+    float: left;
+    margin: 15px;
+    height: 300px;
+    border-radius: 2%;
+    /* 'rem' means relative to the size of the root element. */
+    max-width: 22rem;
+    /* It goes: offset-x, offset-y, blur-radius, spread-radius, color. */
+    box-shadow: 10px 10px 5px 5px rgba(0,0,0,0.2);
+    /* Transition: <property> <duration> <timing-function> <delay> */
+  
+}
+
+.logList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-top: 30px;
+  margin: auto 50px auto 50px;
+  font-family: 'Archivo Narrow', sans-serif;
+  font-size: 1.2em;
+  max-width: 90%;
+}

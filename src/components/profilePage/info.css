@@ -1,0 +1,22 @@
+.overall {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding-top: 30px;
+    margin: auto 50px;
+    font-family: 'Archivo Narrow', sans-serif;
+    font-size: 1.2em;
+    max-width: 0%;
+}
+
+.pic {
+    width: 50%;
+    height: 50%;
+}
+
+.username {
+    display: flex;
+    flex-flow: column;
+    font-family: inherit;
+    font-size: 1.2em;
+}
