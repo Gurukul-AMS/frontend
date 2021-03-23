@@ -1,43 +1,33 @@
 import React from 'react';
-import {makeStyles} from '@material-ui/core/styles';
-import Table from 'react-bootstrap/Table';
+import './logStyle.css';
 
+export default function Log(props){
 
-const useStyles = makeStyles({
+  var source;
+  var alt = props.action;
 
-});
+  if(alt === "Registered")
+  {
+    source = "../img/register.png";
+  }  else if(alt === "Logged In") {
+    source = "../img/login.png";
+  } else if(alt === "Viewed Profile") {
+    source = "../img/image.png";
+  } else if (alt === "Viewed Academic Calendar") {
+    source = "../img/calendar.png";
+  }
 
-export default function Log(){
+  return (<div className="card">
+     <dt>
+      <span className="action" role="img">
+        <img className="action" alt={alt} src = {source}/>
+      </span>
+    </dt>
+    <h5>Date: {props.date}</h5>
+    <h5>Time: {props.time}</h5>
+    <h4>Action: {props.action}</h4>
+    <h4>User: {props.user}</h4>
 
-    return <Table striped bordered hover>
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Date</th>
-        <th>Time</th>
-        <th>Action</th>
-        <th>User</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>1</td>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td colSpan="2">Larry the Bird</td>
-        <td>@twitter</td>
-      </tr>
-    </tbody>
-  </Table>
+  </div>);
 
 };

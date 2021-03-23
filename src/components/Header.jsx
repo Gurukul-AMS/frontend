@@ -23,7 +23,7 @@ function Header(props){
     if(check)
     {
       link1 = "";
-      show1 = "";
+      show1 = props.currentUser.role;
       link2 = "/logout";
       show2 = "Logout";
     }
@@ -42,9 +42,9 @@ function Header(props){
     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
     <Navbar.Collapse id="responsive-navbar-nav">
     <Nav className="mr-auto">
-        <Nav.Link href="feed">Calendar</Nav.Link>
+        <Nav.Link href="/calendar">Calendar</Nav.Link>
         <Nav.Link href="compose">Time Table</Nav.Link>
-        <Nav.Link href="/profile">Profile</Nav.Link>
+        <Nav.Link href={"/profile/"+ props.currentUser.role}>Profile</Nav.Link>
     </Nav>
     <Nav>
         <Nav.Link href={link1}>{show1}</Nav.Link>
@@ -52,7 +52,7 @@ function Header(props){
     </Nav>
     <Nav>
         <div className={classes.root}>
-            <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+            <Avatar alt={props.currentUser.username} src="" />
         </div>
     </Nav>
     </Navbar.Collapse>
