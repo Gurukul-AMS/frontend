@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
   appBar: {
     top: 'auto',
     bottom: 0,
+    marginTop: '50px'
   },
   grow: {
     flexGrow: 1,
@@ -30,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     top: -30,
     left: 0,
     right: 0,
-    margin: '0 auto',
+    margin: '50px auto',
   },
 }));
 

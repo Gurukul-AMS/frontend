@@ -23,7 +23,7 @@ export default function Home(props) {
       }
       else
       {
-        path = "/"+ role +"/profile";
+        path = "/profile/" + role;
         value = "View Profile";
       }
     }

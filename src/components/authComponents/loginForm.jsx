@@ -33,10 +33,15 @@ export default function Form(props) {
       credentials: 'include',
       withCredentials: true
     }).then(function(response){
-      if (response.status === 200) {
+      if (response.data.role!== "Admin") {
+        console.log(response.data);
         localStorage.setItem('username', response.data.username);
         localStorage.setItem('newUser',"true");
-        window.location = `/profile`;          
+        window.location = `/profile/${response.data.role}`;          
+      } else if(response.data.role === "Admin") {
+        localStorage.setItem('username', response.data.username);
+        localStorage.setItem('newUser',"true");
+        window.location = `/admin/logs`;   
       }
       // console.log(response);
     });
@@ -44,7 +49,7 @@ export default function Form(props) {
   
   const handleChange = (prop) => (event) => {
     updateInfo({ ...info, [prop]: event.target.value });
-    console.log(info);
+      // console.log(info);
   };
 
   return (

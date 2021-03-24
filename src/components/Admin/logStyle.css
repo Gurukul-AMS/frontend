@@ -1,26 +1,50 @@
-.log {
-    text-align: center;
-    background-color: rgb(56, 53, 53);
-    border: 5px solid #efefef;  
-    float: left;
-    margin: 15px;
-    height: 300px;
-    border-radius: 2%;
-    /* 'rem' means relative to the size of the root element. */
-    max-width: 22rem;
-    /* It goes: offset-x, offset-y, blur-radius, spread-radius, color. */
-    box-shadow: 10px 10px 5px 5px rgba(0,0,0,0.2);
-    /* Transition: <property> <duration> <timing-function> <delay> */
-  
-}
-
-.logList {
+.logs {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   padding-top: 30px;
-  margin: auto 50px auto 50px;
+  margin: auto 50px 100px 50px;
   font-family: 'Archivo Narrow', sans-serif;
   font-size: 1.2em;
-  max-width: 90%;
+  max-width: 100%;
+}
+
+.card {
+  text-align: center;
+  background-color: white;
+  border: 5px solid #efefef;  
+  float: left;
+  margin: 15px;
+  height: 300px;
+  width: 400px;
+  border-radius: 2%;
+  box-shadow: 10px 10px 5px 5px rgba(0,0,0,0.2);
+
+}
+
+.action {
+  width: 5rem;
+  height: 5rem;
+  margin: 20px auto;
+  display: block;
+}
+
+dt {
+  margin: 5px auto 5px auto;
+  font-size: 1.3em;
+  color: #590995;
+}
+
+.card:hover {
+  -webkit-transition: all 500ms;
+  -moz-transition: all 500ms;
+  -o-transition: all 500ms;
+  -ms-transition: all 500ms;
+  transition: all 500ms;
+  box-shadow: 10px 10px 1px 1px rgba(99,99,99,99);
+}
+
+dd {
+  padding-top: 5px;
+  padding-right: 40px;
 }
