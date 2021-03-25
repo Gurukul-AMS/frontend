@@ -22,7 +22,7 @@ function Logout(){
     });
 
     return <div>
-        <h2>You have logged out. </h2>
+        <h2>You are logged out. </h2>
 
     </div>
 }

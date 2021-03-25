@@ -50,7 +50,7 @@ export default function FormPropsTextFields() {
       if (response.status === 200) {
         localStorage.setItem('username', response.data.username)
         localStorage.setItem('newUser',"true");
-        window.location = `/profile/${response.data.username}`          
+        window.location = `/profile/${response.data.role}`          
       }
       console.log(response);
     });
