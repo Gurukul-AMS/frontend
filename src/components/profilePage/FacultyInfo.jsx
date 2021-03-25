@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles({
   overall: {
-    backgroundImage: 'url(https://www.wallpapertip.com/wmimgs/9-97997_black-white-books-books-wallpaper-hd.jpg)',
+    backgroundColor: '#301b3f',
     objectFit: 'fill',
     overflow: 'hidden',
     height: '100vh',
@@ -86,7 +86,13 @@ const useStyles = makeStyles({
   },
   h3: {
     margin: '30px',
-  }
+  },
+
+  midRow: {
+    display: 'flex',
+  },
+
+
 
 });
 
@@ -95,7 +101,7 @@ export default function Info(props){
   const classes = useStyles();
 
   const [profile, updateProfile] = useState({});
-  const [courses, updateCourses] = useState();
+  const [courses, updateCourses] = useState([]);
 
   function checkLogin(){
     Axios.get("http://localhost:5000/api/profile", {withCredentials: true}).then(response => {
@@ -153,16 +159,16 @@ export default function Info(props){
             <h3 className={classes.h3}>{profile.firstName+ " " + profile.lastName}</h3>
         </div>
     </div>
-    <div className="midrow">
-        <div className="email">
+    <div className={classes.topRow}>
+        <div className={classes.username}>
             <h5 className={classes.h5}>Email: </h5>
             <h3 className={classes.h3}>{profile.email}</h3>
         </div>
         <div>
           <h5 className={classes.h5}>Courses: </h5>
-          {/* {profile.other.map((course) => (
+          {courses.map((course) => (
             <h3>{course.courseName}</h3>
-          ))} */}
+          ))}
         </div>
     </div>
   </div>);
