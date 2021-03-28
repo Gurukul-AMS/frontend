@@ -5,6 +5,12 @@ import querystring from 'querystring';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const comp = [
     {
@@ -22,17 +28,48 @@ const comp = [
 ];
 
 const useStyles = makeStyles((theme) => ({
+    bg: {
+        backgroundImage: 'url(https://images.squarespace-cdn.com/content/v1/58f8719c20099e4ee8f00783/1560858968195-3VYKW8C7IK00782IBJ8N/ke17ZwdGBToddI8pDm48kM_7jmUC-RyB-fa6m4uHSml7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UWVaKOtxYD4pZkIk17N8ApxkFHPhlbZftWDkZ8jkyPQ4vb3PiBfwt-qYfVQRKl72mQ/Wallpaper-Malavida-Green-Top-Image.jpg)',
+        backgroundSize: 'cover',
+        height:'100vh',
+        maxWidth: '100%',
+        overflow: 'hidden',
+        objectFit: 'fill',
+    },
     root: {
         '& .MuiTextField-root': {
           margin: theme.spacing(1),
           width: '25ch',
+          display: 'flex',
+          flexDirection: 'column',
+          margin: '50px auto',
         },
+    },
+
+    block: {
+        border: '2px solid black',
+        width: '35%',
+        margin: '50px auto 80px auto',
+        paddingBottom: '50px',
+        borderRadius: '10%',
+        backgroundColor: 'white',
+    },
+
+    button: {
+        textAlign: 'center',
+    },
+
+    heading: {
+        textAlign: 'center',
+        paddingTop: '50px',
     }
+
 }));
 
 export default function UploadMarks(){
 
     const classes = useStyles();
+    const [open, setOpen] = useState(false);
 
     const [courses, newCourses] = useState([{
         _id: 'Not working',
@@ -70,6 +107,7 @@ export default function UploadMarks(){
         }).then(response => {
             if(response.status === 200) {
                 console.log("Marks successfully updated");
+                handleClick();
             }
         });
 
@@ -133,8 +171,25 @@ export default function UploadMarks(){
           // console.log(info);
     };   
 
-    return (<div>
+    const handleClick = () => {
+        setOpen(true);
+        console.log("This is working");
+    };
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+
+        setOpen(false);
+    };
+
+    return (<div className={classes.bg}>
+    <div className={classes.block}>
         <form className={classes.root} noValidate autoComplete="off">
+            <div className={classes.heading}>
+                <h1>Upload Marks</h1>
+            </div>
             <div>
                 <TextField
                 id="outlined-select-component"
@@ -151,6 +206,8 @@ export default function UploadMarks(){
                     </MenuItem>
                 ))}
                 </TextField>
+            </div>
+            <div>
                 <TextField
                 id="outlined-select-course"
                 select
@@ -162,6 +219,8 @@ export default function UploadMarks(){
                 >
                 {courseOptions()}
                 </TextField>
+            </div>
+            <div>
                 <TextField
                 id="outlined-select-student"
                 select
@@ -173,6 +232,8 @@ export default function UploadMarks(){
                 >
                 {studentOptions()}
                 </TextField>
+            </div>
+            <div>
                 <TextField
                     id="outlined-number"
                     label="Marks"
@@ -191,10 +252,18 @@ export default function UploadMarks(){
                 />
             </div>
             
+            <div className={classes.button}>
             <Button variant="contained" color="primary" onClick={sendMarks}>
                 Submit
             </Button>
+            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="success">
+                    Marks successfully updated!
+                </Alert>
+            </Snackbar>
+            </div>
         </form>
+        </div>
     </div>);
 
 }

@@ -15,8 +15,11 @@ import AddClass from "./components/Admin/AddClass";
 import AddCourse from "./components/Admin/AddCourse";
 import AllUsers from "./components/Admin/AllUsers";
 import UploadMarks from "./components/Faculty/UploadMarks";
-import Attendance from "./components/Attendance/App";
-import TestCase from "./components/Dropdown/App";
+// import Attendance from "./components/Attendance/App";
+// import TestCase from "./components/Dropdown/App";
+import SendCourse from "./components/Student/SendCourse";
+import SendClass from "./components/Student/SendClass";
+import Notifs from "./components/Drawer";
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import './home.css';
 import axios from 'axios';
@@ -72,8 +75,9 @@ function App() {
           <Route exact path="/login" component={Login}/>
           <Route exact path="/logout" component={Logout}/>
           <Route exact path="/calendar" component={Calendar}/>
-          <Route exact path="/attendance" component={Attendance}/>
-          <Route exact path="/test" component={TestCase}/>
+          <Route exact path="/notifs" component={Notifs}/>
+          {/* <Route exact path="/attendance" component={Attendance}/>
+          <Route exact path="/test" component={TestCase}/> */}
           <Route exact 
             path="/admin/logs" 
             render = {props => (
@@ -125,6 +129,18 @@ function App() {
             <Route exact
             path="/faculty/marks"
             component={UploadMarks}
+          />}
+          {state.user.role === "Student"
+            &&
+            <Route exact
+            path="/student/course"
+            component={SendCourse}
+          />}
+          {state.user.role === "Student"
+            &&
+            <Route exact
+            path="/student/class"
+            component={SendClass}
           />}
         </Switch>
       </header>
