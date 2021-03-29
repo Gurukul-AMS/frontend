@@ -19,7 +19,7 @@ import UploadMarks from "./components/Faculty/UploadMarks";
 // import TestCase from "./components/Dropdown/App";
 import SendCourse from "./components/Student/SendCourse";
 import SendClass from "./components/Student/SendClass";
-import Notifs from "./components/Drawer";
+import ViewNotifs from "./components/Notifications/ViewNotifs";
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import './home.css';
 import axios from 'axios';
@@ -75,7 +75,7 @@ function App() {
           <Route exact path="/login" component={Login}/>
           <Route exact path="/logout" component={Logout}/>
           <Route exact path="/calendar" component={Calendar}/>
-          <Route exact path="/notifs" component={Notifs}/>
+          <Route exact path="/notifs" component={ViewNotifs}/>
           {/* <Route exact path="/attendance" component={Attendance}/>
           <Route exact path="/test" component={TestCase}/> */}
           <Route exact 

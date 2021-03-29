@@ -1,9 +1,10 @@
-import React from "react";
+import {React, useState, useEffect} from "react";
 import { Nav, Navbar} from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
-import Notifications from "./Notifications";
+import Badge from '@material-ui/core/Badge';
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -16,6 +17,23 @@ const useStyles = makeStyles((theme) => ({
 
 function Header(props){
 
+    const [number, updateNum] = useState(0);
+
+    function howManyNotifs() {
+      axios.get("http://localhost:5000/api/notifs", {withCredentials: true}).then(response => {
+        if(response.status === 200) {
+          updateNum(response.data);
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    };
+
+    useEffect(() => {
+      howManyNotifs();
+    });
+
     var check = (props.showThis === "LOGGED_IN") ? true : false;
     var link1;
     var link2;
@@ -23,7 +41,7 @@ function Header(props){
     var show2;
     if(check)
     {
-      link1 = "";
+      link1 = "/drawer";
       show1 = props.currentUser.role;
       link2 = "/logout";
       show2 = "Logout";
@@ -53,7 +71,11 @@ function Header(props){
     </Nav>
     <Nav>
         <div className={classes.root}>
-            <Avatar alt={props.currentUser.username} src="" />
+            <a href="/notifs">
+              <Badge badgeContent = {number.length} color="primary">
+                <Avatar alt={props.currentUser.username} src="" />
+              </Badge>
+            </a>
         </div>
     </Nav>
     </Navbar.Collapse>
