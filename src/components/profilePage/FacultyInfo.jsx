@@ -143,7 +143,7 @@ export default function Info(props){
           <p>Faculty</p>
         </div>
         <div className={classes.button}>
-          <Button size="large" variant="contained" color="primary">Edit</Button>
+          <Button size="large" variant="contained" color="primary" href="/faculty/edit">Edit</Button>
         </div>
       </div>
     <div className={classes.topRow}>

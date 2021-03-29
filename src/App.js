@@ -15,6 +15,7 @@ import AddClass from "./components/Admin/AddClass";
 import AddCourse from "./components/Admin/AddCourse";
 import AllUsers from "./components/Admin/AllUsers";
 import UploadMarks from "./components/Faculty/UploadMarks";
+import UploadAttend from "./components/Faculty/UploadAttend";
 // import Attendance from "./components/Attendance/App";
 // import TestCase from "./components/Dropdown/App";
 import SendCourse from "./components/Student/SendCourse";
@@ -129,6 +130,12 @@ function App() {
             <Route exact
             path="/faculty/marks"
             component={UploadMarks}
+          />}
+          {state.user.role === "Faculty"
+            &&
+            <Route exact
+            path="/faculty/attendance"
+            component={UploadAttend}
           />}
           {state.user.role === "Student"
             &&

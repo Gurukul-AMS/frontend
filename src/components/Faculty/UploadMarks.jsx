@@ -62,7 +62,13 @@ const useStyles = makeStyles((theme) => ({
     heading: {
         textAlign: 'center',
         paddingTop: '50px',
-    }
+    },
+    loop: {
+        width: '100%',
+        '& > * + *': {
+          marginTop: theme.spacing(2),
+        },
+    },
 
 }));
 
@@ -100,18 +106,21 @@ export default function UploadMarks(){
     }
 
     function sendMarks(){
+
+        setOpen(true);
+
         axios.post("http://localhost:5000/api/addmarks", querystring.stringify({component: whichComp, course: whichCourse, semester: info.semester, section: info.section, student: record.studentId, cg: record.studentMarks}), {
             headers: {
                 'content-type': 'application/x-www-form-urlencoded;charset=utf-8'
             },
         }).then(response => {
-            if(response.status === 200) {
-                console.log("Marks successfully updated");
-                handleClick();
+            if(response.data === 200) {
+                console.log("Marks updated");
+                window.location = '/faculty/marks';
             }
         });
 
-    }
+    };
 
     function courseOptions() {
         return courses.map((option) => (
@@ -170,11 +179,6 @@ export default function UploadMarks(){
         updateRecord({ ...record, [prop]: event.target.value });
           // console.log(info);
     };   
-
-    const handleClick = () => {
-        setOpen(true);
-        console.log("This is working");
-    };
 
     const handleClose = (event, reason) => {
         if (reason === 'clickaway') {
@@ -252,15 +256,17 @@ export default function UploadMarks(){
                 />
             </div>
             
-            <div className={classes.button}>
-            <Button variant="contained" color="primary" onClick={sendMarks}>
-                Submit
-            </Button>
-            <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-                <Alert onClose={handleClose} severity="success">
-                    Marks successfully updated!
-                </Alert>
-            </Snackbar>
+            <div className={classes.loop}>
+                <div className={classes.button}>
+                    <Button variant="contained" color="primary" onClick={sendMarks}>
+                        Submit
+                    </Button>
+                    <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                    <Alert onClose={handleClose} severity="success">
+                        Marks successfully updated!
+                    </Alert>
+                </Snackbar>
+                </div>
             </div>
         </form>
         </div>

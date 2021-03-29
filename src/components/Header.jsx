@@ -30,6 +30,14 @@ function Header(props){
       });
     };
 
+    function setNumber() {
+      if(props.showThis === "LOGGED_IN") {
+        return number.length;
+      } else {
+        return 0;
+      }
+    }
+
     useEffect(() => {
       howManyNotifs();
     });
@@ -72,7 +80,7 @@ function Header(props){
     <Nav>
         <div className={classes.root}>
             <a href="/notifs">
-              <Badge badgeContent = {number.length} color="primary">
+              <Badge badgeContent = {setNumber()} color="primary">
                 <Avatar alt={props.currentUser.username} src="" />
               </Badge>
             </a>
