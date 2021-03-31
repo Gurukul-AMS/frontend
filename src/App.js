@@ -16,8 +16,7 @@ import AddCourse from "./components/Admin/AddCourse";
 import AllUsers from "./components/Admin/AllUsers";
 import UploadMarks from "./components/Faculty/UploadMarks";
 import UploadAttend from "./components/Faculty/UploadAttend";
-// import Attendance from "./components/Attendance/App";
-// import TestCase from "./components/Dropdown/App";
+import ViewMarks from "./components/Student/ViewMarks";
 import SendCourse from "./components/Student/SendCourse";
 import SendClass from "./components/Student/SendClass";
 import ViewNotifs from "./components/Notifications/ViewNotifs";
@@ -148,6 +147,12 @@ function App() {
             <Route exact
             path="/student/class"
             component={SendClass}
+          />}
+          {state.user.role === "Student"
+            &&
+            <Route exact
+            path="/student/marks"
+            component={ViewMarks}
           />}
         </Switch>
       </header>
