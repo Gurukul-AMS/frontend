@@ -54,11 +54,11 @@ export default function ViewNotifs(){
 
     function showNotifs(){
         if(notifs) {
-            console.log(notifs);
-            // return (notifs.map((notif) => <Notification
-            //     from = {notif.from}
-            //     content = {notif.content}
-            // />));
+            // console.log(notifs);
+            return (notifs.map((notif) => <Notification
+                from = {notif.from}
+                content = {notif.content}
+            />));
         } else {
             return "Whoops, sorry!";
         }
