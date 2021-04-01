@@ -4,7 +4,31 @@ import {makeStyles} from '@material-ui/core/styles';
 import Marks from "./Marks";
 
 const useStyles = makeStyles({
+    body: {
+        backgroundImage: 'url(https://www.imaginefactory.com/wp-content/uploads/2017/04/SPACES_BG-2.jpg)',
+        backgroundSize: 'cover',
+        height:'100vh',
+        maxWidth: '100%',
+        overflow: 'hidden',
+        objectFit: 'fill',
+    },
 
+    root: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        margin: 'auto 50px 100px 50px',
+        justifyContent: 'space-between',
+        paddingTop: '30px',
+        maxWidth: '100%'
+    },
+
+    heading: {
+        textAlign: 'center',
+        paddingTop: '50px',
+        fontFamily: "'Monaco', monospace",
+        fontSize: '5rem',
+        color: '#9ddfd3',
+    }
 });
 
 export default function ViewMarks() {
@@ -41,15 +65,9 @@ export default function ViewMarks() {
     });
 
     return (<div className={classes.body}>
-        <div className={classes.root}>
-            <div className={classes.heading}>
-                <h1>Marks</h1>
-            </div>
-            <div>
+            <h1 className={classes.heading}>Marks</h1>
+            <div className={classes.root}>
                 {showMarks()}
             </div>
-        </div>
-
-
     </div>)
 };

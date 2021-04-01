@@ -1,29 +1,30 @@
-import React from 'react';
+import {React, useEffect, useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
+import axios from 'axios';
+import querystring from 'querystring';
 
 const useStyles = makeStyles({
 
     card: {
         textAlign: 'center',
-        backgroundColor: '#440a67',
+        backgroundColor: 'white',
         border: '5px solid white',
         float: 'left',
         margin: '15px',
-        height: '300px',
-        width: '800px',
+        height: '200px',
+        width: '300px',
         borderRadius: '5%',
-        color: 'white'
+        color: 'black',
+        boxShadow: '15px 15px 5px black',
     },
 
     action: {
-        width: '5rem',
-        height: '5rem',
-        margin: '20px auto',
-        display: 'block',
+        color: 'black',
+        textAlign: 'center,'
     },
 
     dt: {
-        margin: '5px auto 5px auto',
+        margin: '25px auto 25px auto',
         fontSize: '1.3em',
         color: '#9ddfd3'
     },
@@ -32,15 +33,32 @@ const useStyles = makeStyles({
 
 export default function Attendance(props){
 
+    const [course, whichCourse] = useState("Loading...");
+
+    function findCourse() {
+        
+        axios.post("http://localhost:5000/api/mycourse", querystring.stringify({course: props.course}), {
+            headers: {
+                'content-type': 'application/x-www-form-urlencoded;charset=utf-8'
+            }
+        })
+        .then(response => {
+            if(response.status === 200) {
+                whichCourse(response.data);
+            }
+        });
+    };
+
+    useEffect(() => {
+        findCourse();
+    });
+
     const classes = useStyles();
 
     return (<div className={classes.card}>
         <dt className={classes.dt}>
-            <span className={classes.action} role="image">
-                <img className={classes.action}/>
-            </span>
+            <h3 className={classes.action}>{course}</h3>
         </dt>
-        <h5 className={classes.h5}>From: {props.from}</h5>
-        <h4 className={classes.h4}>{props.content}</h4>
+        <h5 className={classes.h5}>Date: {props.date}</h5>
     </div>);
 };

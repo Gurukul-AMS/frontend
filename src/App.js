@@ -17,6 +17,7 @@ import AllUsers from "./components/Admin/AllUsers";
 import UploadMarks from "./components/Faculty/UploadMarks";
 import UploadAttend from "./components/Faculty/UploadAttend";
 import ViewMarks from "./components/Student/ViewMarks";
+import ViewAttend from "./components/Student/ViewAttend";
 import SendCourse from "./components/Student/SendCourse";
 import SendClass from "./components/Student/SendClass";
 import ViewNotifs from "./components/Notifications/ViewNotifs";
@@ -153,6 +154,12 @@ function App() {
             <Route exact
             path="/student/marks"
             component={ViewMarks}
+          />}
+          {state.user.role === "Student"
+            &&
+            <Route exact
+            path="/student/attendance"
+            component={ViewAttend}
           />}
         </Switch>
       </header>

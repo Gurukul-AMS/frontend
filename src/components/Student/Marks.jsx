@@ -7,21 +7,23 @@ const useStyles = makeStyles({
 
     card: {
         textAlign: 'center',
-        backgroundColor: '#440a67',
+        backgroundColor: 'white',
         border: '5px solid white',
         float: 'left',
         margin: '15px',
-        height: '300px',
-        width: '800px',
+        height: '200px',
+        width: '300px',
         borderRadius: '5%',
-        color: 'white'
+        color: 'black',
+        boxShadow: '15px 15px 5px black',
     },
 
     action: {
-        width: '5rem',
-        height: '5rem',
+        width: '3rem',
+        height: '3rem',
         margin: '20px auto',
         display: 'block',
+        color: 'black'
     },
 
     dt: {

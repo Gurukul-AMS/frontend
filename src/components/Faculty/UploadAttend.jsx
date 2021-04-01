@@ -130,7 +130,7 @@ export default function UploadAttend(){
     function studentOptions() {
         if(studList) {
             return (studList.map((student) => <FormControlLabel
-                control={<Checkbox checked = {middle[student]} onChange = {handleChange} name = {student} />}
+                control={<Checkbox checked = {middle[student]} onChange = {handleChange} value = {student} />}
                 label={student}
             />));
         } else {
@@ -173,8 +173,9 @@ export default function UploadAttend(){
     };
 
     const handleChange = (event) => {
-        updatePresent([...present, [event.target.name]]);
-        middle[event.target.name] = true;
+        updatePresent([...present, event.target.value]);
+        console.log(present);
+        middle[event.target.value] = true;
         
     };
 
