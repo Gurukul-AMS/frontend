@@ -6,8 +6,10 @@ import Login from "./components/authComponents/Login";
 import Signup from "./components/authComponents/Signup";
 import Logout from "./components/authComponents/Logout";
 import ViewLog from "./components/Admin/ViewLog";
-import FacultyInfo from "./components/profilePage/FacultyInfo";
-import StudentInfo from "./components/profilePage/StudentInfo";
+import FacultyInfo from "./components/Faculty/FacultyInfo";
+import StudentInfo from "./components/Student/StudentInfo";
+import EditStudentProfile from "./components/Student/EditProfile";
+import EditFacultyProfile from "./components/Faculty/EditProfile";
 import Home from "./components/Home";
 import Calendar from "./components/Calendar";
 import UploadCal from "./components/Admin/uploadCalendar";
@@ -137,6 +139,12 @@ function App() {
             path="/faculty/attendance"
             component={UploadAttend}
           />}
+          {state.user.role === "Faculty"
+            &&
+            <Route exact
+            path="/faculty/edit"
+            component={EditFacultyProfile}
+          />}          
           {state.user.role === "Student"
             &&
             <Route exact
@@ -160,6 +168,12 @@ function App() {
             <Route exact
             path="/student/attendance"
             component={ViewAttend}
+          />}
+          {state.user.role === "Student"
+            &&
+            <Route exact
+            path="/student/edit"
+            component={EditStudentProfile}
           />}
         </Switch>
       </header>
