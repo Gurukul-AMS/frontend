@@ -1,53 +1,66 @@
 import Axios from 'axios';
-import {React, useEffect, useState} from 'react';
-import Button from 'react-bootstrap/Button';
+import {React, useState} from 'react';
+import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import querystring from 'querystring';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
-      margin: theme.spacing(1),
-      width: '25ch',
+        width: '25ch',
+        display: 'flex',
+        flexDirection: 'column',
+        margin: '50px auto',
     },
   },
+
+  body: {
+        backgroundImage: 'url(https://images.unsplash.com/photo-1495482432709-15807c8b3e2b?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHw%3D&w=1000&q=80)',
+        backgroundSize: 'cover',
+        height:'100vh',
+        maxWidth: '100%',
+        overflow: 'hidden',
+        objectFit: 'fill',
+  },
+
+  block: {
+        border: '2px solid black',
+        width: '35%',
+        margin: '50px auto 80px auto',
+        paddingBottom: '50px',
+        borderRadius: '10%',
+        backgroundColor: 'white',
+  },
+
+  input: {
+      display: 'none',
+  },
+
+  heading: {
+      margin: '30px auto 30px auto',
+      textAlign: 'center',
+  },
+
+  buttons: {
+      textAlign: 'center',
+  }
 }));
 
 export default function Upload(){
 
     const classes = useStyles();
 
-    const [current, updateCurrent] = useState();
-    const [latest, updateLatest] = useState({
-        calData: "",
-        calContent: "image/png"
-    });
-
-    function getCalendar(){
-        Axios.get("http://localhost:5000/api/addcalendar", {withCredentials: true}).then(response=>{
-            if(response.data === "None") {
-                updateCurrent("No calendar to see.");
-            } else if(response.data) {
-                updateCurrent({
-                    data: response.data.data,
-                    contentType: response.data.currentType
-                });
-            }
-        })
-        .catch(error => {
-            console.log(error);
-        });
-    }
+    const [latest, updateLatest] = useState("");
+    const [session, updateSession] = useState("");
 
     function changeCalendar(){
-        Axios.post("http://localhost:5000/api/addcalendar", querystring.stringify({calendarData: latest.calData, calendarContent: latest.calContent}),{
-            headers: {
-              'content-type': 'application/x-www-form-urlencoded;charset=utf-8'
-            },
-            credentials: 'include',
-            withCredentials: true
-        }).then(response=> {
+
+        const formData = new FormData();
+        
+        formData.append("whichYear", session);
+        formData.append("image", latest);
+
+        Axios.post("http://localhost:5000/api/addcalendar", formData).then(response=> {
             if(response.status === 200) {
                 console.log("Success!");
             }
@@ -57,25 +70,43 @@ export default function Upload(){
         });
     }
 
-    const handleChange = (prop) => (event) => {
-        updateLatest({ ...latest, [prop]: event.target.value });
-          // console.log(info);
+    const handleSession = (event) => {
+        updateSession(event.target.value);
+    }
+
+    function handleChange(event){
+        updateLatest(event.target.files[0]);
     };
 
-    useEffect(()=> {
-        getCalendar();
-    });
-
-
-    return (<div>
-        <h3>Current Calendar:</h3>
-        <img alt="Current Calendar" src= "../img"/  >
-        <form className={classes.root} noValidate autoComplete="off">
-            {/* <Button variant="info">Choose file</Button> */}
-            <TextField type="file" accept=".png .jpg .jpeg" id="standard-basic" label="Choose a file" value={latest.calData} onChange={handleChange}/>
-            <Button variant="primary" size="lg" onClick={changeCalendar}>
-                Upload Calendar
-            </Button>
-        </form>
+    return (<div className={classes.body}>
+        <div className={classes.block}>
+            <div className={classes.heading}>            
+                <h3>Upload Calendar:</h3>
+            </div>
+            <form className={classes.root} noValidate autoComplete="off">
+                <TextField id="outlined-basic" label="Session" variant="outlined" value={session} onChange={handleSession}/>
+            </form>
+            <input
+                accept="image/*"
+                className={classes.input}
+                id="contained-button-file"
+                multiple
+                type="file"
+                filename="image"
+                onClick={handleChange}
+            />
+            <div className={classes.buttons}>
+                <label htmlFor="contained-button-file">
+                    <Button variant="contained" color="primary" component="span" >
+                        Choose Calendar
+                    </Button>
+                </label>
+                <div>
+                    <Button color="primary" variant="contained" onClick={changeCalendar}>
+                        Upload
+                    </Button>
+                </div>
+            </div>
+        </div>
     </div>);
 }
