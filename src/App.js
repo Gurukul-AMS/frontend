@@ -23,8 +23,8 @@ import ViewAttend from "./components/Student/ViewAttend";
 import SendCourse from "./components/Student/SendCourse";
 import SendClass from "./components/Student/SendClass";
 import ViewNotifs from "./components/Notifications/ViewNotifs";
-import FacultyNotif from "./components/Faculty/makeNotif";
-import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import MakeNotif from "./components/makeNotif";
+import {BrowserRouter as Router, Route, StaticRouter, Switch} from 'react-router-dom';
 import './home.css';
 import axios from 'axios';
 import SERVER_URL from '../src/utils/backend';
@@ -146,11 +146,11 @@ function App() {
             path="/faculty/edit"
             component={EditFacultyProfile}
           />}
-          {state.user.role === "Faculty"
+          {state.user.role === "Faculty" || state.user.role === "Admin"
             &&
             <Route exact
-            path="/faculty/notif"
-            component={FacultyNotif}
+            path= {"/faculty/notif" || "/admin/notif"}
+            component={MakeNotif}
           />}             
           {state.user.role === "Student"
             &&

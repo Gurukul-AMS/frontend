@@ -72,7 +72,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-export default function FacultyNotif() {
+export default function MakeNotif() {
 
     const classes = useStyles();
     
