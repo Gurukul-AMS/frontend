@@ -23,6 +23,7 @@ import ViewAttend from "./components/Student/ViewAttend";
 import SendCourse from "./components/Student/SendCourse";
 import SendClass from "./components/Student/SendClass";
 import ViewNotifs from "./components/Notifications/ViewNotifs";
+import FacultyNotif from "./components/Faculty/makeNotif";
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import './home.css';
 import axios from 'axios';
@@ -144,7 +145,13 @@ function App() {
             <Route exact
             path="/faculty/edit"
             component={EditFacultyProfile}
-          />}          
+          />}
+          {state.user.role === "Faculty"
+            &&
+            <Route exact
+            path="/faculty/notif"
+            component={FacultyNotif}
+          />}             
           {state.user.role === "Student"
             &&
             <Route exact

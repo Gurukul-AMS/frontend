@@ -1,7 +1,6 @@
 import Axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Logout from "../authComponents/Logout";
-import './info.css';
 
 export default function Info(props){
 
