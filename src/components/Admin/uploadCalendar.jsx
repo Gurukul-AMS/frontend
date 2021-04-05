@@ -93,7 +93,7 @@ export default function Upload(){
                 multiple
                 type="file"
                 filename="image"
-                onClick={handleChange}
+                onChange={handleChange}
             />
             <div className={classes.buttons}>
                 <label htmlFor="contained-button-file">

@@ -1,18 +1,48 @@
 import {React, useEffect, useState} from 'react';
 import axios from 'axios';
+import {makeStyles} from '@material-ui/core/styles';
 
+const useStyles = makeStyles({
+    body: {
+        background: '#9D50BB',  /* fallback for old browsers */
+        background: '-webkit-linear-gradient(to right, #6E48AA, #9D50BB)',  /* Chrome 10-25, Safari 5.1-6 */
+        background: 'linear-gradient(to right, #6E48AA, #9D50BB)', /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        backgroundSize: 'cover',
+        height:'100vh',
+        maxWidth: '100%',
+        overflow: 'hidden',
+        objectFit: 'fill',
+    },
+
+    root: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        flexDirection: 'column',
+    },
+
+    image: {
+        width: '50%',
+        height: '50%',
+        margin: '50px auto 50px auto',
+    },
+
+    heading: {
+        margin: '30px auto 50px auto',
+
+    }
+});
 
 export default function Calendar() {
 
-    const [calendar, updateCal] = useState({
-        data: "",
-        contentType: ""
-    });
+    const classes = useStyles();
+    const [calendar, updateCal] = useState();
 
     function getCalendar() {
+
         axios.get("http://localhost:5000/api/calendar", {withCredentials: true}).then(response => {
             if(response.status === 200) {
-                updateCal(response.data);
+                updateCal(response.data.calendar.data);
+            } else {
             }
         })
         .catch(err => {
@@ -20,11 +50,27 @@ export default function Calendar() {
         });
     }
 
+    function findCalendar() {
+        console.log(calendar);
+        if(calendar) {
+            return calendar;
+        } else {
+            return "";
+        }
+    }
+
     useEffect(()=> {
         getCalendar();
     });
 
-    return (<div>
-        <img alt="Academic Calendar" src={calendar.data}/>
+    return (<div className={classes.body}>
+        <div className={classes.root}>
+            <div className={classes.heading}>
+                <h1>Academic Calendar</h1>
+            </div>
+            <div className={classes.image}>
+                <img alt="Academic Calendar" src={findCalendar()}/>
+            </div>
+        </div>
     </div>);
 }
