@@ -24,6 +24,7 @@ import GroupIcon from '@material-ui/icons/Group';
 import InboxIcon from '@material-ui/icons/Inbox';
 import InputIcon from '@material-ui/icons/Input';
 import AddBoxIcon from '@material-ui/icons/AddBox';
+import EditIcon from '@material-ui/icons/Edit';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -38,6 +39,9 @@ const useStyles = makeStyles((theme) => ({
     fullList: {
       width: 'auto',
     },
+    button: {
+      color: 'white',
+    }
 }));
 
 export default function Header(props){
@@ -193,6 +197,8 @@ export default function Header(props){
       } else if(props.currentUser === "Faculty") {
         if(index === 0) {
           return <InboxIcon/>;
+        } else if(index === 1) {
+          return <EditIcon/>;
         }
       } else if(props.currentUser === "Student") {
         if(index === 0) {
@@ -209,17 +215,19 @@ export default function Header(props){
       
       if(props.currentUser === "Admin") {
         if(index === 0) {
-          return "/admin/notifs";
+          return "/notifs";
         } else if(index === 1) {
           return "/admin/users";
         }
       } else if(props.currentUser === "Faculty") {
         if(index === 0) {
-          return "/faculty/notifs";
-        } 
+          return "/notifs";
+        } else if(index === 1) {
+          return "/sendnotif";
+        }
       } else if(props.currentUser === "Student") {
         if(index === 0) {
-          return "/student/notifs";
+          return "/notifs";
         } else if(index === 1) {
           return "/student/class";
         } else if(index === 2) {
@@ -245,7 +253,7 @@ export default function Header(props){
 
       else if(props.currentUser === "Faculty") {
         return <List>
-        {['Notifications'].map((text, index) => (
+        {['Notifications', 'Send Notification'].map((text, index) => (
           <ListItem button key={text}>
             <a href={lowerLink(index)}>
             <ListItemIcon>{lowerIcon(index)}</ListItemIcon>
@@ -311,7 +319,7 @@ export default function Header(props){
         return <Nav><Nav.Link href="/signup">Sign Up</Nav.Link></Nav>
       } else {
         return (<div>
-          <Button onClick={toggleDrawer('right', true)}>{props.currentUser}</Button>
+          <Button className={classes.button} onClick={toggleDrawer('right', true)}>{props.currentUser}</Button>
           <SwipeableDrawer
             anchor= 'right'
             open={state['right']}
@@ -323,6 +331,14 @@ export default function Header(props){
         </div>);
       }
 
+    }
+
+    function whichLink() {
+      if(props.showThis === "LOGGED_IN") {
+        return "/notifs";
+      } else {
+        return "/logout";
+      }
     }
 
     return <Navbar collapseOnSelect variant="dark" expand="lg">
@@ -340,7 +356,7 @@ export default function Header(props){
       </Nav>
       <Nav>
           <div className={classes.root}>
-              <a href="/notifs">
+              <a href={whichLink()}>
                 <Badge badgeContent = {setNumber()} color="primary">
                   <Avatar alt={props.currentUser.username} src="" />
                 </Badge>
