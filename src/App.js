@@ -146,10 +146,10 @@ function App() {
             path="/faculty/edit"
             component={EditFacultyProfile}
           />}
-          {state.user === "Faculty" 
+          {state.user === "Faculty" || state.user === "Admin"
             &&
             <Route exact
-            path= "/faculty/notif"
+            path= "/faculty/sendnotif"
             component={MakeNotif}
           />}             
           {state.user === "Student"

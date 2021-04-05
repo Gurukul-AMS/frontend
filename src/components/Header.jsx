@@ -110,14 +110,48 @@ export default function Header(props){
       }
     }
 
+    function upperLink(index){
+      if(props.currentUser === "Admin") {
+        if(index === 0) {
+          return "/admin/class";
+        } else if(index === 1) {
+          return "/admin/course";
+        } else if(index === 2) {
+          return "/admin/logs";
+        } else if(index === 3) {
+          return "/admin/calendar";
+        }
+      } else if(props.currentUser === "Faculty") {
+        if(index === 0) {
+          return "/faculty/edit";
+        } else if(index === 1) {
+          return "/faculty/attendance";
+        } else if(index === 2) {
+          return "/faculty/marks";
+        } else if(index === 3) {
+          return "/faculty/students";
+        }
+      } else if(props.currentUser === "Student") {
+        if(index === 0) {
+          return "/student/edit";
+        } else if(index === 1) {
+          return "/student/attendance";
+        } else if(index === 2) {
+          return "/student/marks";
+        } 
+      }
+    }
+
     function upperList(){
       
       if(props.currentUser === "Admin") {
         return <List>
         {['Add Class', 'Add Course', 'View Logs', 'Upload Calendar'].map((text, index) => (
           <ListItem button key={text}>
+            <a href={upperLink(index)}>
             <ListItemIcon>{upperIcon(index)}</ListItemIcon>
             <ListItemText primary={text} />
+            </a>
           </ListItem>
         ))}
       </List>
@@ -127,8 +161,10 @@ export default function Header(props){
         return <List>
         {['Edit Profile', 'Upload Attendance', 'Upload Marks', 'View Students'].map((text, index) => (
           <ListItem button key={text}>
+            <a href={upperLink(index)}>
             <ListItemIcon>{upperIcon(index)}</ListItemIcon>
             <ListItemText primary={text} />
+            </a>
           </ListItem>
         ))}
       </List>
@@ -137,14 +173,15 @@ export default function Header(props){
         return <List>
         {['Edit Profile', 'View Attendance', 'View Marks'].map((text, index) => (
           <ListItem button key={text}>
+            <a href={upperLink(index)}>
             <ListItemIcon>{upperIcon(index)}</ListItemIcon>
             <ListItemText primary={text} />
+            </a>
           </ListItem>
         ))}
       </List>
       }
     }
-
     
     function lowerIcon(index) {
       if(props.currentUser === "Admin") {
@@ -168,14 +205,39 @@ export default function Header(props){
       }
     }
 
+    function lowerLink(index) {
+      
+      if(props.currentUser === "Admin") {
+        if(index === 0) {
+          return "/admin/notifs";
+        } else if(index === 1) {
+          return "/admin/users";
+        }
+      } else if(props.currentUser === "Faculty") {
+        if(index === 0) {
+          return "/faculty/notifs";
+        } 
+      } else if(props.currentUser === "Student") {
+        if(index === 0) {
+          return "/student/notifs";
+        } else if(index === 1) {
+          return "/student/class";
+        } else if(index === 2) {
+          return "/student/course";
+        } 
+      }
+    }
+
     function lowerList() {
 
       if(props.currentUser === "Admin") {
         return <List>
         {['Notifications', 'View Users'].map((text, index) => (
           <ListItem button key={text}>
+            <a href={lowerLink(index)}>
             <ListItemIcon>{lowerIcon(index)}</ListItemIcon>
             <ListItemText primary={text} />
+            </a>
           </ListItem>
         ))}
       </List>
@@ -185,8 +247,10 @@ export default function Header(props){
         return <List>
         {['Notifications'].map((text, index) => (
           <ListItem button key={text}>
+            <a href={lowerLink(index)}>
             <ListItemIcon>{lowerIcon(index)}</ListItemIcon>
             <ListItemText primary={text} />
+            </a>
           </ListItem>
         ))}
       </List>
@@ -196,8 +260,10 @@ export default function Header(props){
         return <List>
         {['Notifications', 'Update Class', 'Update Course'].map((text, index) => (
           <ListItem button key={text}>
+            <a href={lowerLink(index)}>
             <ListItemIcon>{lowerIcon(index)}</ListItemIcon>
             <ListItemText primary={text} />
+            </a>
           </ListItem>
         ))}
       </List>
