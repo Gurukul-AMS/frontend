@@ -30,7 +30,7 @@ function ViewLog(props) {
 
     if(props.loggedInStatues === "NOT_LOGGED_IN")
       return <Logout/>
-    else if(props.currentUser.role !== "Admin")
+    else if(props.currentUser !== "Admin")
       return <NotAuth/>
 
     else

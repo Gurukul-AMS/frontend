@@ -78,17 +78,45 @@ export default function Header(props){
       setState({ ...state, [anchor]: open });
     };
 
+    function upperIcon(index) {
+      if(props.currentUser === "Admin") {
+        if(index === 0) {
+          return <PeopleOutlineIcon/>;
+        } else if(index === 1){
+          return <MenuBookIcon href="/admin/course"/>;
+        } else if(index === 2){
+          return <ListAltIcon href="/admin/logs"/>;
+        } else if(index === 3){
+          return <CalendarTodayIcon href="/admin/calendar"/>;
+        }
+      } else if(props.currentUser === "Faculty") {
+        if(index === 0) {
+          return <AccountBoxIcon/>;
+        } else if(index === 1){
+          return <FormatListNumberedIcon/>;
+        } else if(index === 2){
+          return <AssignmentTurnedInIcon/>;
+        } else if(index === 3){
+          return <GroupIcon/>;
+        }
+      } else if(props.currentUser === "Student") {
+        if(index === 0) {
+          return <AccountBoxIcon/>;
+        } else if(index === 1){
+          return <FormatListNumberedIcon/>;
+        } else if(index === 2){
+          return <AssignmentTurnedInIcon/>;
+        } 
+      }
+    }
+
     function upperList(){
       
       if(props.currentUser === "Admin") {
         return <List>
         {['Add Class', 'Add Course', 'View Logs', 'Upload Calendar'].map((text, index) => (
           <ListItem button key={text}>
-            <ListItemIcon>{index === 0 && <PeopleOutlineIcon/>}</ListItemIcon>
-            <ListItemIcon>{index === 1 && <MenuBookIcon/>}</ListItemIcon>
-            <ListItemIcon>{index === 2 && <ListAltIcon/>}</ListItemIcon>
-            <ListItemIcon>{index === 3 && <CalendarTodayIcon/>}</ListItemIcon>
-
+            <ListItemIcon>{upperIcon(index)}</ListItemIcon>
             <ListItemText primary={text} />
           </ListItem>
         ))}
@@ -99,10 +127,7 @@ export default function Header(props){
         return <List>
         {['Edit Profile', 'Upload Attendance', 'Upload Marks', 'View Students'].map((text, index) => (
           <ListItem button key={text}>
-            <ListItemIcon>{index === 0 && <AccountBoxIcon/>}</ListItemIcon>
-            <ListItemIcon>{index === 1 && <FormatListNumberedIcon/>}</ListItemIcon>
-            <ListItemIcon>{index === 2 && <AssignmentTurnedInIcon/>}</ListItemIcon>
-            <ListItemIcon>{index === 3 && <GroupIcon/>}</ListItemIcon>
+            <ListItemIcon>{upperIcon(index)}</ListItemIcon>
             <ListItemText primary={text} />
           </ListItem>
         ))}
@@ -112,13 +137,34 @@ export default function Header(props){
         return <List>
         {['Edit Profile', 'View Attendance', 'View Marks'].map((text, index) => (
           <ListItem button key={text}>
-            <ListItemIcon>{index === 0 && <AccountBoxIcon/>}</ListItemIcon>
-            <ListItemIcon>{index === 1 && <FormatListNumberedIcon/>}</ListItemIcon>
-            <ListItemIcon>{index === 2 && <AssignmentTurnedInIcon/>}</ListItemIcon>
+            <ListItemIcon>{upperIcon(index)}</ListItemIcon>
             <ListItemText primary={text} />
           </ListItem>
         ))}
       </List>
+      }
+    }
+
+    
+    function lowerIcon(index) {
+      if(props.currentUser === "Admin") {
+        if(index === 0) {
+          return <InboxIcon/>;
+        } else if(index === 1){
+          return <GroupIcon/>;
+        } 
+      } else if(props.currentUser === "Faculty") {
+        if(index === 0) {
+          return <InboxIcon/>;
+        }
+      } else if(props.currentUser === "Student") {
+        if(index === 0) {
+          return <InboxIcon/>;
+        } else if(index === 1){
+          return <InputIcon/>;
+        } else if(index === 2){
+          return <AddBoxIcon/>;
+        } 
       }
     }
 
@@ -128,8 +174,7 @@ export default function Header(props){
         return <List>
         {['Notifications', 'View Users'].map((text, index) => (
           <ListItem button key={text}>
-            <ListItemIcon>{index  === 0 && <InboxIcon />}</ListItemIcon>
-            <ListItemIcon>{index  === 1 && <GroupIcon />}</ListItemIcon>
+            <ListItemIcon>{lowerIcon(index)}</ListItemIcon>
             <ListItemText primary={text} />
           </ListItem>
         ))}
@@ -140,7 +185,7 @@ export default function Header(props){
         return <List>
         {['Notifications'].map((text, index) => (
           <ListItem button key={text}>
-            <ListItemIcon>{index  === 0 && <InboxIcon />}</ListItemIcon>
+            <ListItemIcon>{lowerIcon(index)}</ListItemIcon>
             <ListItemText primary={text} />
           </ListItem>
         ))}
@@ -151,9 +196,7 @@ export default function Header(props){
         return <List>
         {['Notifications', 'Update Class', 'Update Course'].map((text, index) => (
           <ListItem button key={text}>
-            <ListItemIcon>{index  === 0 && <InboxIcon />}</ListItemIcon>
-            <ListItemIcon>{index  === 1 && <InputIcon />}</ListItemIcon>
-            <ListItemIcon>{index  === 2 && <AddBoxIcon />}</ListItemIcon>
+            <ListItemIcon>{lowerIcon(index)}</ListItemIcon>
             <ListItemText primary={text} />
           </ListItem>
         ))}
