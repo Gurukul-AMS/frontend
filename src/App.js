@@ -33,7 +33,7 @@ function App() {
 
   const [state, changeState] = useState({
     loggedInStatus: "NOT_LOGGED_IN",
-    user: {}
+    user: "",
   });
 
   function checkLoginStatus(){
@@ -41,7 +41,7 @@ function App() {
       if(response.data && state.loggedInStatus === "NOT_LOGGED_IN"){
         changeState({
           loggedInStatus: "LOGGED_IN",
-          user: response.data
+          user: response.data.role
         });
         // console.log(response);
       } else if(!response.data && state.loggedInStatus === "LOGGED_IN") {
@@ -88,7 +88,7 @@ function App() {
               <ViewLog {...props} showThis={state.loggedInStatus} currentUser={state.user}/>
             )} 
           />
-          {state.user.role === "Faculty"
+          {state.user === "Faculty"
             &&
             <Route exact
             path="/profile/faculty"
@@ -96,7 +96,7 @@ function App() {
               <FacultyInfo {...props} showThis={state.loggedInStatus} currentUser={state.user}/>
             )}  
           />}
-          {state.user.role === "Student"
+          {state.user === "Student"
             &&
             <Route exact
             path="/profile/student"
@@ -104,79 +104,79 @@ function App() {
               <StudentInfo {...props} showThis={state.loggedInStatus} currentUser={state.user}/>
             )}  
           />}
-          {state.user.role === "Admin"
+          {state.user === "Admin"
             &&
             <Route exact
             path="/admin/calendar"
             component={UploadCal}
           />}
-          {state.user.role === "Admin"
+          {state.user === "Admin"
             &&
             <Route exact
             path="/admin/class"
             component={AddClass}
           />}
-          {state.user.role === "Admin"
+          {state.user === "Admin"
             &&
             <Route exact
             path="/admin/course"
             component={AddCourse}
           />}
-          {state.user.role === "Admin"
+          {state.user === "Admin"
             &&
             <Route exact
             path="/admin/users"
             component={AllUsers}
           />}
-          {state.user.role === "Faculty"
+          {state.user === "Faculty"
             &&
             <Route exact
             path="/faculty/marks"
             component={UploadMarks}
           />}
-          {state.user.role === "Faculty"
+          {state.user === "Faculty"
             &&
             <Route exact
             path="/faculty/attendance"
             component={UploadAttend}
           />}
-          {state.user.role === "Faculty"
+          {state.user === "Faculty"
             &&
             <Route exact
             path="/faculty/edit"
             component={EditFacultyProfile}
           />}
-          {state.user.role === "Faculty" || state.user.role === "Admin"
+          {state.user === "Faculty" || state.user === "Admin"
             &&
             <Route exact
             path= {"/faculty/notif" || "/admin/notif"}
             component={MakeNotif}
           />}             
-          {state.user.role === "Student"
+          {state.user === "Student"
             &&
             <Route exact
             path="/student/course"
             component={SendCourse}
           />}
-          {state.user.role === "Student"
+          {state.user === "Student"
             &&
             <Route exact
             path="/student/class"
             component={SendClass}
           />}
-          {state.user.role === "Student"
+          {state.user === "Student"
             &&
             <Route exact
             path="/student/marks"
             component={ViewMarks}
           />}
-          {state.user.role === "Student"
+          {state.user === "Student"
             &&
             <Route exact
             path="/student/attendance"
             component={ViewAttend}
           />}
-          {state.user.role === "Student"
+          {state.user === "Student"
             &&
             <Route exact
             path="/student/edit"

@@ -4,22 +4,21 @@ import {makeStyles} from '@material-ui/core/styles';
 const useStyles = makeStyles({
 
     card: {
-        textAlign: 'center',
-        backgroundColor: '#440a67',
-        border: '5px solid white',
-        float: 'left',
-        margin: '15px',
-        height: '300px',
-        width: '800px',
-        borderRadius: '5%',
-        color: 'white'
+        backgroundColor: '#323232',
+        borderRadius: '2%',
+        margin: '5px 30px 5px 30px',
+        height: '150px',
+        width: '90%',
+        color: '#ffffff'
     },
 
     action: {
         width: '5rem',
         height: '5rem',
-        margin: '20px auto',
+        marginLeft: '20px',
+        marginTop: '2%',
         display: 'block',
+        float: 'left',
     },
 
     dt: {
@@ -27,6 +26,14 @@ const useStyles = makeStyles({
         fontSize: '1.3em',
         color: '#9ddfd3'
     },
+
+    h5: {
+        marginLeft: '10%',
+        marginTop: '3%'
+    },
+    h4: {
+        marginLeft: '10%',
+    }
 
 });
 
@@ -40,7 +47,9 @@ export default function Notification(props){
                 <img className={classes.action}/>
             </span>
         </dt>
-        <h5 className={classes.h5}>From: {props.from}</h5>
-        <h4 className={classes.h4}>{props.content}</h4>
+        <div>
+        <p className={classes.h5}>From: {props.from}</p>
+        </div>
+        <p className={classes.h4}>{props.content}</p>
     </div>);
 };
