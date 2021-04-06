@@ -1,9 +1,11 @@
 import Axios from 'axios';
-import {React, useState} from 'react';
+import {React, useEffect, useState} from 'react';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
+import TextField from '@material-ui/core/TextField';
+import MenuItem from '@material-ui/core/MenuItem';
 
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -57,7 +59,20 @@ export default function Upload(){
     const [open, setOpen] = useState(false);
 
     const [file, updateFile] = useState("");
+    const [profList, updateList] = useState([]);
     const [prof, updateProf] = useState();
+
+    function getProfs(){
+
+        Axios.get("http://localhost:5000/api/allusers", {withCredentials: true}).then(response => {
+            if(response.status === 200) {
+                updateList(response.data);
+            }
+        })
+        .catch(error => {
+            console.log(error);
+        })
+    }
 
     function sendFile(){
 
@@ -77,8 +92,28 @@ export default function Upload(){
         });
     }
 
+    function profOptions(){
+        if(profList){
+            return profList.map((prof) => (
+                <MenuItem key={prof._id} value={prof._id}>
+                {prof.username}
+                </MenuItem>
+            ));
+        } else {
+            return "Loading...";
+        }
+    }
+
+    useEffect(() => {
+        getProfs();
+    })
+
     function handleChange(event){
         updateFile(event.target.files[0]);
+    }
+
+    function handleProf(event){
+        updateProf(event.target.value);
     }
 
     const handleClose = (event, reason) => {
@@ -94,6 +129,21 @@ export default function Upload(){
             <div className={classes.heading}>            
                 <h3>Upload Thesis:</h3>
             </div>
+            <form className={classes.root} noValidate autoComplete="off">
+                <div>
+                    <TextField
+                        id="outlined-select-professor"
+                        select
+                        label="Select"
+                        value={prof}
+                        onChange={handleProf}
+                        helperText="Please select faculty member"
+                        variant="outlined"
+                        >
+                        {profOptions()}
+                    </TextField>
+                </div>
+            </form>
             <input
                 accept="file/*"
                 className={classes.input}
