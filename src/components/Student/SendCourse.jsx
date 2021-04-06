@@ -71,7 +71,7 @@ export default function SendCourse() {
 
         setOpen(true);
         
-        Axios.post("http://localhost:5000/api/sendcourse", querystring.stringify({}), {
+        Axios.post("http://localhost:5000/api/sendcourse", querystring.stringify({course: whichCourse}), {
             headers: {
                 'content-type': 'application/x-www-form-urlencoded;charset=utf-8'
             },

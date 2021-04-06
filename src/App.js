@@ -17,6 +17,7 @@ import AddClass from "./components/Admin/AddClass";
 import AddCourse from "./components/Admin/AddCourse";
 import AllUsers from "./components/Admin/AllUsers";
 import UpdateClass from "./components/Admin/UpdateClass";
+import UpdateCourse from "./components/Admin/UpdateCourse";
 import UploadMarks from "./components/Faculty/UploadMarks";
 import UploadAttend from "./components/Faculty/UploadAttend";
 import ViewMarks from "./components/Student/ViewMarks";
@@ -116,7 +117,13 @@ function App() {
             <Route exact
             path="/admin/updateclass"
             component={UpdateClass}
-          />}          
+          />}      
+          {state.user === "Admin"
+            &&
+            <Route exact
+            path="/admin/updatecourse"
+            component={UpdateCourse}
+          />}                
           {state.user === "Admin"
             &&
             <Route exact

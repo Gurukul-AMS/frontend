@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     },
 
     body: {
-        backgroundImage: 'url(https://wallpaperaccess.com/full/284607.jpg)',
+        backgroundImage: 'url(https://i.pinimg.com/originals/0e/ad/eb/0eadebe7a808c205e802b0f088b35821.jpg)',
         backgroundSize: 'cover',
         height:'100vh',
         maxWidth: '100%',
@@ -58,8 +58,8 @@ export default function UpdateClass() {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
 
-    const [classList, updateList] = useState([]);
-    const [whichClass, updateClass] = useState();
+    const [courseList, updateList] = useState([]);
+    const [whichCourse, updateCourse] = useState();
     const [studList, updateStudents] = useState([]);
     const [whichStudent, thisStudent] = useState();
 
@@ -75,9 +75,9 @@ export default function UpdateClass() {
         });
     }
 
-    function getClasses() {
+    function getCourses() {
 
-        axios.get("http://localhost:5000/api/getclasses", {withCredentials: true}).then(response => {
+        axios.get("http://localhost:5000/api/getcourses", {withCredentials: true}).then(response => {
             if(response.status === 200) {
                 updateList(response.data);
             }
@@ -91,7 +91,7 @@ export default function UpdateClass() {
 
         setOpen(true);
 
-        axios.post("http://localhost:5000/api/class", querystring.stringify({student: whichStudent, class: whichClass}), {
+        axios.post("http://localhost:5000/api/course", querystring.stringify({studentName: whichStudent, course: whichCourse}), {
             headers: {
                 'content-type': 'application/x-www-form-urlencoded;charset=utf-8'
             },
@@ -103,11 +103,11 @@ export default function UpdateClass() {
         });
     }
 
-    function classOptions() {
-        if(classList) {
-            return classList.map((option) => (
+    function courseOptions() {
+        if(courseList) {
+            return courseList.map((option) => (
                 <MenuItem key={option._id} value={option._id}>
-                    Semester {option.semester} - Section {option.section} 
+                    {option.courseName}
                 </MenuItem>));
         } else {
             return "Sorry";
@@ -117,7 +117,7 @@ export default function UpdateClass() {
     function studentOptions() {
         if(studList) {
             return studList.map((stud) => (        
-            <MenuItem key={stud._id} value={stud._id}>
+            <MenuItem key={stud.username} value={stud.username}>
                 {stud.username}
             </MenuItem>));
         } else {
@@ -127,15 +127,15 @@ export default function UpdateClass() {
 
     useEffect(() => {
         getStudents();
-        getClasses();
+        getCourses();
     });
 
     const handleStudent = (event) => {
         thisStudent(event.target.value);
     }
 
-    const handleClass = (event) => {
-        updateClass(event.target.value);
+    const handleCourse = (event) => {
+        updateCourse(event.target.value);
     }
 
     const handleClose = (event, reason) => {
@@ -149,20 +149,20 @@ export default function UpdateClass() {
     return (<div className={classes.body}>
         <div className={classes.root}>
             <div className={classes.heading}>
-                <h1>Update Class</h1>
+                <h1>Update Course</h1>
             </div>
             <form className={classes.form} noValidate autoComplete="off">
                 <div>
                     <TextField
-                    id="outlined-select-class"
+                    id="outlined-select-course"
                     select
                     label="Select"
-                    value={whichClass}
-                    onChange={handleClass}
-                    helperText="Please select the class"
+                    value={whichCourse}
+                    onChange={handleCourse}
+                    helperText="Please select the course"
                     variant="outlined"
                     >
-                    {classOptions()}
+                    {courseOptions()}
                     </TextField>
                     <TextField
                     id="outlined-select-student"
@@ -179,7 +179,7 @@ export default function UpdateClass() {
             </form>
             <div>
                 <Button className={classes.button} variant="contained" color="primary" onClick={sendStudent}>
-                    Update Class
+                    Update Course
                 </Button>
                 <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
                     <Alert onClose={handleClose} severity="success">
