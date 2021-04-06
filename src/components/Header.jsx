@@ -365,7 +365,7 @@ export default function Header(props){
     }
 
     function profilePage() {
-      return "/profile" + props.currentUser;
+      return "/profile/" + props.currentUser;
     }
 
     return <Navbar collapseOnSelect variant="dark" expand="lg">
