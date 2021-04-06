@@ -5,6 +5,12 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import Axios from 'axios';
 import querystring from 'querystring';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+};
 
 const semesters = [
   {
@@ -60,7 +66,6 @@ const useStyles = makeStyles((theme) => ({
   },
   root: {
     '& .MuiTextField-root': {
-      margin: theme.spacing(1),
       width: '30ch',
       display: 'flex',
       flexDirection: 'column',
@@ -80,6 +85,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MultilineTextFields() {
   const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
+
   const [semester, setSemester] = React.useState('Select semester');
   const [section, changeSection] = React.useState();
   const [name, changeName] = React.useState();
@@ -88,18 +95,26 @@ export default function MultilineTextFields() {
 
   const handleChange = (event) => {
     setSemester(event.target.value);
-  };
+  }
 
   const sectionChange = (event) => {
     changeSection(event.target.value);
-  };
+  }
 
   const setName = (event) => {
     changeName(event.target.value);
-  };
+  }
 
   const handleProf = (event) => {
     updateProf(event.target.value);
+  }
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
   }
 
   function getInfo() {
@@ -115,7 +130,9 @@ export default function MultilineTextFields() {
   }
 
   function sendInfo(){
-      Axios.post("http://localhost:5000/api/addcourse", querystring.stringify({course: name, section: section, semester: semester, professor: whichProf} ),{
+
+    setOpen(true);
+    Axios.post("http://localhost:5000/api/addcourse", querystring.stringify({course: name, section: section, semester: semester, professor: whichProf} ),{
         headers: {
           'content-type': 'application/x-www-form-urlencoded;charset=utf-8'
         },
@@ -190,6 +207,11 @@ export default function MultilineTextFields() {
           <Button className={classes.limbo} variant="outlined" color="primary" onClick={sendInfo}>
               Add Course
           </Button>
+          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+              <Alert onClose={handleClose} severity="success">
+                  New Course Added!
+              </Alert>
+          </Snackbar>
         </div>
       </div>
     </form>

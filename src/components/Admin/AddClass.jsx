@@ -5,6 +5,12 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
 import Axios from 'axios';
 import querystring from 'querystring';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+};
 
 const semesters = [
   {
@@ -60,7 +66,6 @@ const useStyles = makeStyles((theme) => ({
   },
   root: {
     '& .MuiTextField-root': {
-      margin: theme.spacing(1),
       width: '30ch',
       display: 'flex',
       flexDirection: 'column',
@@ -80,6 +85,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function MultilineTextFields() {
   const classes = useStyles();
+  const [open, setOpen] = React.useState(false);
+
   const [semester, setSemester] = React.useState('Select semester');
   const [section, changeSection] = React.useState();
 
@@ -92,7 +99,10 @@ export default function MultilineTextFields() {
   };
 
   function sendInfo(){
-      Axios.post("http://localhost:5000/api/addclass", querystring.stringify({section: section, semester: semester}),{
+
+    setOpen(true);
+
+    Axios.post("http://localhost:5000/api/addclass", querystring.stringify({section: section, semester: semester}),{
         headers: {
           'content-type': 'application/x-www-form-urlencoded;charset=utf-8'
         },
@@ -106,6 +116,14 @@ export default function MultilineTextFields() {
       .catch(error => {
           console.log(error);
       });
+  }
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
   }
 
   return (<div className={classes.body}>
@@ -140,6 +158,11 @@ export default function MultilineTextFields() {
           <Button className={classes.limbo} variant="outlined" color="primary" onClick={sendInfo}>
               Add Class
           </Button>
+          <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+              <Alert onClose={handleClose} severity="success">
+                  New Class Added!
+              </Alert>
+          </Snackbar>          
         </div>
       </div>
     </form>

@@ -3,6 +3,12 @@ import {React, useState} from 'react';
 import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+};
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -49,6 +55,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Upload(){
 
     const classes = useStyles();
+    const [open, setOpen] = useState(false);
 
     const [latest, updateLatest] = useState("");
     const [session, updateSession] = useState("");
@@ -59,6 +66,8 @@ export default function Upload(){
         
         formData.append("whichYear", session);
         formData.append("image", latest);
+
+        setOpen(true);
 
         Axios.post("http://localhost:5000/api/addcalendar", formData).then(response=> {
             if(response.status === 200) {
@@ -76,7 +85,15 @@ export default function Upload(){
 
     function handleChange(event){
         updateLatest(event.target.files[0]);
-    };
+    }
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+          return;
+        }
+
+        setOpen(false);
+    }
 
     return (<div className={classes.body}>
         <div className={classes.block}>
@@ -105,6 +122,11 @@ export default function Upload(){
                     <Button color="primary" variant="contained" onClick={changeCalendar}>
                         Upload
                     </Button>
+                    <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                        <Alert onClose={handleClose} severity="success">
+                            Calendar Uploaded!
+                        </Alert>
+                    </Snackbar>                    
                 </div>
             </div>
         </div>
