@@ -26,6 +26,7 @@ import SendCourse from "./components/Student/SendCourse";
 import SendClass from "./components/Student/SendClass";
 import ViewNotifs from "./components/Notifications/ViewNotifs";
 import MakeNotif from "./components/makeNotif";
+import UpdatePic from "./components/UpdatePic";
 import {BrowserRouter as Router, Route, StaticRouter, Switch} from 'react-router-dom';
 import './home.css';
 import axios from 'axios';
@@ -160,7 +161,7 @@ function App() {
             path="/faculty/edit"
             component={EditFacultyProfile}
           />}
-          {(state.user === "Faculty" || "Admin")
+          {(state.user === "Faculty" || state.user === "Admin")
             &&
             <Route exact
             path= "/sendnotif"
@@ -195,6 +196,12 @@ function App() {
             <Route exact
             path="/student/edit"
             component={EditStudentProfile}
+          />}
+          {(state.user === "Student"|| state.user === "Faculty")
+            &&
+            <Route exact
+            path="/updatepic"
+            component={UpdatePic}
           />}
         </Switch>
       </header>

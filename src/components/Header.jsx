@@ -25,6 +25,9 @@ import InboxIcon from '@material-ui/icons/Inbox';
 import InputIcon from '@material-ui/icons/Input';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import EditIcon from '@material-ui/icons/Edit';
+import NoteAddIcon from '@material-ui/icons/NoteAdd';
+import PostAddIcon from '@material-ui/icons/PostAdd';
+import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -87,11 +90,15 @@ export default function Header(props){
         if(index === 0) {
           return <PeopleOutlineIcon/>;
         } else if(index === 1){
-          return <MenuBookIcon href="/admin/course"/>;
+          return <MenuBookIcon/>;
         } else if(index === 2){
-          return <ListAltIcon href="/admin/logs"/>;
+          return <EditIcon/>;
         } else if(index === 3){
-          return <CalendarTodayIcon href="/admin/calendar"/>;
+          return <CalendarTodayIcon/>;
+        } else if(index === 4){
+          return <NoteAddIcon/>;
+        } else if(index === 5) {
+          return <PostAddIcon/>;
         }
       } else if(props.currentUser === "Faculty") {
         if(index === 0) {
@@ -101,16 +108,20 @@ export default function Header(props){
         } else if(index === 2){
           return <AssignmentTurnedInIcon/>;
         } else if(index === 3){
-          return <GroupIcon/>;
+          return <AddAPhotoIcon/>;
+        } else if(index === 4) {
+          return <EditIcon/>;
         }
       } else if(props.currentUser === "Student") {
         if(index === 0) {
           return <AccountBoxIcon/>;
         } else if(index === 1){
-          return <FormatListNumberedIcon/>;
+          return <InputIcon/>;
         } else if(index === 2){
-          return <AssignmentTurnedInIcon/>;
-        } 
+          return <AddBoxIcon/>;
+        } else if(index === 3){
+          return <AddAPhotoIcon/>;
+        }
       }
     }
 
@@ -121,9 +132,13 @@ export default function Header(props){
         } else if(index === 1) {
           return "/admin/course";
         } else if(index === 2) {
-          return "/admin/logs";
+          return "/sendnotif";
         } else if(index === 3) {
           return "/admin/calendar";
+        } else if(index === 4) {
+          return "/admin/updateclass";
+        } else if(index === 5) {
+          return "/admin/updatecourse";
         }
       } else if(props.currentUser === "Faculty") {
         if(index === 0) {
@@ -133,16 +148,20 @@ export default function Header(props){
         } else if(index === 2) {
           return "/faculty/marks";
         } else if(index === 3) {
-          return "/faculty/students";
+          return "/updatepic";
+        } else if(index === 4) {
+          return "/sendnotif";
         }
       } else if(props.currentUser === "Student") {
         if(index === 0) {
           return "/student/edit";
         } else if(index === 1) {
-          return "/student/attendance";
+          return "/student/class";
         } else if(index === 2) {
-          return "/student/marks";
-        } 
+          return "/student/course";
+        } else if(index === 3) {
+          return "/updatepic";
+        }
       }
     }
 
@@ -150,7 +169,7 @@ export default function Header(props){
       
       if(props.currentUser === "Admin") {
         return <List>
-        {['Add Class', 'Add Course', 'View Logs', 'Upload Calendar'].map((text, index) => (
+        {['Add Class', 'Add Course', 'Send Notification', 'Upload Calendar', 'Update Class', 'Update Course'].map((text, index) => (
           <ListItem button key={text}>
             <a href={upperLink(index)}>
             <ListItemIcon>{upperIcon(index)}</ListItemIcon>
@@ -163,7 +182,7 @@ export default function Header(props){
 
       else if(props.currentUser === "Faculty") {
         return <List>
-        {['Edit Profile', 'Upload Attendance', 'Upload Marks', 'View Students'].map((text, index) => (
+        {['Edit Profile', 'Upload Attendance', 'Upload Marks', 'Upload Profile Picture', 'Send Notifications'].map((text, index) => (
           <ListItem button key={text}>
             <a href={upperLink(index)}>
             <ListItemIcon>{upperIcon(index)}</ListItemIcon>
@@ -175,7 +194,7 @@ export default function Header(props){
 
       } else if (props.currentUser === "Student") {
         return <List>
-        {['Edit Profile', 'View Attendance', 'View Marks'].map((text, index) => (
+        {['Edit Profile', 'Update Class', 'Update Course', 'Upload Profile Picture'].map((text, index) => (
           <ListItem button key={text}>
             <a href={upperLink(index)}>
             <ListItemIcon>{upperIcon(index)}</ListItemIcon>
@@ -193,20 +212,22 @@ export default function Header(props){
           return <InboxIcon/>;
         } else if(index === 1){
           return <GroupIcon/>;
-        } 
+        } else if(index === 2){
+          return <ListAltIcon/>;
+        }
       } else if(props.currentUser === "Faculty") {
         if(index === 0) {
           return <InboxIcon/>;
         } else if(index === 1) {
-          return <EditIcon/>;
+          return <GroupIcon/>;
         }
       } else if(props.currentUser === "Student") {
         if(index === 0) {
           return <InboxIcon/>;
         } else if(index === 1){
-          return <InputIcon/>;
+          return <FormatListNumberedIcon/>;
         } else if(index === 2){
-          return <AddBoxIcon/>;
+          return <AssignmentTurnedInIcon/>;
         } 
       }
     }
@@ -218,6 +239,8 @@ export default function Header(props){
           return "/notifs";
         } else if(index === 1) {
           return "/admin/users";
+        } else if(index === 2) {
+          return "/admin/logs";
         }
       } else if(props.currentUser === "Faculty") {
         if(index === 0) {
@@ -229,9 +252,9 @@ export default function Header(props){
         if(index === 0) {
           return "/notifs";
         } else if(index === 1) {
-          return "/student/class";
+          return "/student/marks";
         } else if(index === 2) {
-          return "/student/course";
+          return "/student/attendance";
         } 
       }
     }
@@ -240,7 +263,7 @@ export default function Header(props){
 
       if(props.currentUser === "Admin") {
         return <List>
-        {['Notifications', 'View Users'].map((text, index) => (
+        {['View Notifications', 'View Users', 'View Logs'].map((text, index) => (
           <ListItem button key={text}>
             <a href={lowerLink(index)}>
             <ListItemIcon>{lowerIcon(index)}</ListItemIcon>
@@ -253,7 +276,7 @@ export default function Header(props){
 
       else if(props.currentUser === "Faculty") {
         return <List>
-        {['Notifications', 'Send Notification'].map((text, index) => (
+        {['View Notifications', 'View Students'].map((text, index) => (
           <ListItem button key={text}>
             <a href={lowerLink(index)}>
             <ListItemIcon>{lowerIcon(index)}</ListItemIcon>
@@ -266,7 +289,7 @@ export default function Header(props){
 
       else if(props.currentUser === "Student") {
         return <List>
-        {['Notifications', 'Update Class', 'Update Course'].map((text, index) => (
+        {['View Notifications', 'View Marks', 'View Attendance'].map((text, index) => (
           <ListItem button key={text}>
             <a href={lowerLink(index)}>
             <ListItemIcon>{lowerIcon(index)}</ListItemIcon>
@@ -362,7 +385,7 @@ export default function Header(props){
           <div className={classes.root}>
               <a href={whichLink()}>
                 <Badge badgeContent = {setNumber()} color="primary">
-                  <Avatar alt={props.currentUser.username} src="" />
+                  <Avatar alt={props.currentUser} src={props.photo} />
                 </Badge>
               </a>
           </div>

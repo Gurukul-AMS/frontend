@@ -6,12 +6,12 @@ import axios from 'axios';
 const useStyles = makeStyles({
 
     body: {
-        backgroundImage: 'url(https://cdn.shopify.com/s/files/1/0285/1316/products/w0106_1s_Blue-Watercolor-Pattern-Wallpaper-for-Walls-Outside-the-Lines_Repeating-Pattern-Sample-1.jpg?v=1604087907)',
+        backgroundColor: '#a3d2ca',
         backgroundSize: 'cover',
         maxWidth: '100%',
         overflow: 'hidden',
         objectFit: 'fill',
-        height: '200vh'
+        height: '100%'
     },
 
     container: {
