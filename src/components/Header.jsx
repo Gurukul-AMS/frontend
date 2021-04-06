@@ -341,6 +341,10 @@ export default function Header(props){
       }
     }
 
+    function profilePage() {
+      return "/profile" + props.currentUser;
+    }
+
     return <Navbar collapseOnSelect variant="dark" expand="lg">
       <Navbar.Brand href="/">Gurukul</Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -348,7 +352,7 @@ export default function Header(props){
       <Nav className="mr-auto">
           <Nav.Link href="/calendar">Calendar</Nav.Link>
           <Nav.Link href="compose">Time Table</Nav.Link>
-          <Nav.Link href={"/profile/"+ props.currentUser.role}>Profile</Nav.Link>
+          <Nav.Link href={profilePage()}>Profile</Nav.Link>
       </Nav>
       {hereDrawer()}
       <Nav>
