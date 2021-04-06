@@ -13,8 +13,6 @@ import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 
-axios.defaults.withCredentials = true;
-
 function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
@@ -77,10 +75,7 @@ export default function UploadAttend(){
     const classes = useStyles();
     const [open, setOpen] = useState(false);
 
-    const [courses, newCourses] = useState([{
-        _id: 'Not working',
-        courseName: 'Not working'
-    }]);
+    const [courses, newCourses] = useState([]);
     const [whichCourse, updateCourse] = useState();
     const [info, updateInfo] = useState({
         semester: "",
@@ -88,17 +83,23 @@ export default function UploadAttend(){
     });
     const [studList, updateList] = useState([]);
     const [middle, changeMiddle] = useState({});
-    const [present, updatePresent] = useState([""]);
+    const [present, updatePresent] = useState([]);
 
     function getCourses() {
-        axios.get("http://localhost:5000/api/getcourses").then(response => {
+
+        console.log("I mean, come on!");
+
+        axios.get("http://localhost:5000/api/getcourses", {withCredentials: true}).then(response => {
             if(response.status === 200) {
                 newCourses(response.data);
-                // console.log(response.data);
+                console.log(response);
+            } else {
+                console.log("Failure");
             }
         })
         .catch(error => {
             console.log(error);
+            console.log("Another failure");
         });
     };
 
@@ -128,6 +129,8 @@ export default function UploadAttend(){
     }
 
     function studentOptions() {
+        getCourses();
+
         if(studList) {
             return (studList.map((student) => <FormControlLabel
                 control={<Checkbox checked = {middle[student]} onChange = {handleChange} value = {student} />}
@@ -140,7 +143,7 @@ export default function UploadAttend(){
 
     useEffect(() => {
         getCourses();
-    });
+    },[]);
 
     const handleCourse = (event) => {
 
@@ -157,7 +160,7 @@ export default function UploadAttend(){
                 updateList(course.students);
 
                 course.students.map((student) => {
-                    changeMiddle({...middle, [student]: false});
+                    middle[student] = false;
                 });
             }
         });

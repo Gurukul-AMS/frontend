@@ -77,7 +77,7 @@ export default function UpdateClass() {
 
     function getCourses() {
 
-        axios.get("http://localhost:5000/api/getcourses", {withCredentials: true}).then(response => {
+        axios.get("http://localhost:5000/api/allcourses", {withCredentials: true}).then(response => {
             if(response.status === 200) {
                 updateList(response.data);
             }
