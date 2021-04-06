@@ -58,8 +58,8 @@ export default function SendCourse() {
         Axios.get("http://localhost:5000/api/sendcourse", {withCredentials: true}).then(response => {
             if(response.status === 200) {
                 changeCourses(response.data);
-                console.log(courses);
-                console.log("Bruh");
+                // console.log(courses);
+                // console.log("Bruh");
             }
         })
         .catch(error => {
