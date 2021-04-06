@@ -4,20 +4,37 @@ import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
 import querystring from 'querystring';
 import Button from '@material-ui/core/Button';
+import MuiAlert from '@material-ui/lab/Alert';
+import Snackbar from '@material-ui/core/Snackbar';
+
+function Alert(props) {
+  return <MuiAlert elevation={20} variant="filled" {...props} />;
+};
 
 axios.defaults.withCredentials = true;
 
 const useStyles = makeStyles((theme) => ({
   root: {
     '& .MuiTextField-root': {
-      margin: theme.spacing(1),
       width: '25ch',
+      display: 'flex',
+      margin: '30px auto auto auto',
     },
   },
+
+  body: {
+    height: '300px',
+  },
+
+  button: {
+    textAlign: 'center',
+    margin: '40px auto auto auto',
+  }
 }));
 
 export default function Form(props) {
   const classes = useStyles();
+  const [open, setOpen] = useState(false);
 
   const [info, updateInfo] = useState({
     role: String,
@@ -26,6 +43,7 @@ export default function Form(props) {
   });
 
   function sendRequest() {
+
     axios.post(`http://localhost:5000/api/login`, querystring.stringify({role: props.role, username: info.username, password: info.password}), {
       headers: {
         'content-type': 'application/x-www-form-urlencoded;charset=utf-8'
@@ -33,7 +51,10 @@ export default function Form(props) {
       credentials: 'include',
       withCredentials: true
     }).then(function(response){
-      if (response.data.role!== "Admin") {
+
+      console.log(response.data);
+
+      if (response.data.role === "Student" || response.data.role === "Faculty") {
         console.log(response.data);
         localStorage.setItem('username', response.data.username);
         localStorage.setItem('newUser',"true");
@@ -42,9 +63,13 @@ export default function Form(props) {
         localStorage.setItem('username', response.data.username);
         localStorage.setItem('newUser',"true");
         window.location = `/admin/logs`;   
-      }
-      // console.log(response);
-    });
+      } 
+    })
+    .catch(error => {
+      console.log("Did something happen?");
+      setOpen(true);
+      console.log(error);
+    })
   }
   
   const handleChange = (prop) => (event) => {
@@ -52,7 +77,15 @@ export default function Form(props) {
       // console.log(info);
   };
 
-  return (
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
+  }
+
+  return (<div className={classes.body}>
     <form className={classes.root} noValidate autoComplete="off">
 
       <div>
@@ -77,9 +110,16 @@ export default function Form(props) {
         />
 
       </div>
-      <Button onClick={sendRequest} variant="outlined" color="primary">
-        Submit
-      </Button>
+      <div className={classes.button}>
+        <Button onClick={sendRequest} variant="outlined" color="primary">
+          Submit
+        </Button>
+        <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="error">
+                Incorrect Credentials
+            </Alert>
+        </Snackbar>
+      </div>
     </form>
-  );
+  </div>);
 }
