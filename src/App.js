@@ -27,6 +27,7 @@ import SendClass from "./components/Student/SendClass";
 import ViewNotifs from "./components/Notifications/ViewNotifs";
 import MakeNotif from "./components/makeNotif";
 import UpdatePic from "./components/UpdatePic";
+import UploadThesis from "./components/Student/UploadThesis";
 import {BrowserRouter as Router, Route, StaticRouter, Switch} from 'react-router-dom';
 import './home.css';
 import axios from 'axios';
@@ -196,6 +197,12 @@ function App() {
             <Route exact
             path="/student/edit"
             component={EditStudentProfile}
+          />}
+          {state.user === "Student"
+            &&
+            <Route exact
+            path="/student/thesis"
+            component={UploadThesis}
           />}
           {(state.user === "Student"|| state.user === "Faculty")
             &&
