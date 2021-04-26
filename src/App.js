@@ -29,6 +29,8 @@ import MakeNotif from "./components/makeNotif";
 import UpdatePic from "./components/UpdatePic";
 import UploadThesis from "./components/Student/UploadThesis";
 import UploadClassTime from "./components/Admin/UploadClassTime";
+import UploadCourseTime from "./components/Admin/UploadCourseTime";
+import ViewTime from "./components/ViewTime";
 import {BrowserRouter as Router, Route, StaticRouter, Switch} from 'react-router-dom';
 import './home.css';
 import axios from 'axios';
@@ -85,6 +87,7 @@ function App() {
           <Route exact path="/logout" component={Logout}/>
           <Route exact path="/calendar" component={Calendar}/>
           <Route exact path="/notifs" component={ViewNotifs}/>
+          <Route exact path="/timetable" component={ViewTime}/>
           {/* <Route exact path="/attendance" component={Attendance}/>
           <Route exact path="/test" component={TestCase}/> */}
           <Route exact 
@@ -148,9 +151,15 @@ function App() {
           {state.user === "Admin"
             &&
             <Route exact
-            path="/admin/uploadclasstime"
+            path="/admin/class/uploadtime"
             component={UploadClassTime}
           />}
+          {state.user === "Admin"
+            &&
+            <Route exact
+            path="/admin/course/uploadtime"
+            component={UploadCourseTime}
+          />}          
           {state.user === "Faculty"
             &&
             <Route exact

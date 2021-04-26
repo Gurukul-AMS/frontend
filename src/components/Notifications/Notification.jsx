@@ -7,7 +7,7 @@ const useStyles = makeStyles({
         backgroundColor: '#323232',
         borderRadius: '2%',
         margin: '5px 30px 5px 30px',
-        height: '150px',
+        height: '100%',
         width: '90%',
         color: '#ffffff'
     },
@@ -16,6 +16,7 @@ const useStyles = makeStyles({
         width: '5rem',
         height: '5rem',
         marginLeft: '20px',
+        marginBottom: '2%',
         marginTop: '2%',
         display: 'block',
         float: 'left',

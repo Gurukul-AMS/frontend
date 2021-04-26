@@ -15,7 +15,7 @@ export default function Home(props) {
     }
     else if(props.showThis === "LOGGED_IN")
     {
-      var role = props.currentUser.role;
+      var role = props.currentUser;
       if(role === "Admin")
       {
         path = "/admin/logs";

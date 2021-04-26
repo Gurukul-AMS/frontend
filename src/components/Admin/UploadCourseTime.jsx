@@ -58,14 +58,14 @@ export default function UploadClassTime(){
     const [open, setOpen] = useState(false);
 
     const [latest, updateLatest] = useState("");
-    const [classList, updateList] = useState([]);
+    const [courseList, updateList] = useState([]);
     const [semester, whichSem] = useState("");
-    const [section, whichSec] = useState("");
-    const [thisclass, whichClass] = useState("");
+    const [prof, whichProf] = useState("");
+    const [thisCourse, whichCourse] = useState("");
 
     function getClasses(){
 
-        Axios.get("http://localhost:5000/api/getclasses", {withCredentials: true}).then(response => {
+        Axios.get("http://localhost:5000/api/allcourses", {withCredentials: true}).then(response => {
             if(response.status === 200) {
                 updateList(response.data);
             }
@@ -79,14 +79,14 @@ export default function UploadClassTime(){
 
         const formData = new FormData();
 
-        handleClass();
+        handleCourse();
         
-        formData.append("class", thisclass);
+        formData.append("class", thisCourse);
         formData.append("image", latest);
 
         setOpen(true);
 
-        Axios.post("http://localhost:5000/api/class/uploadtime", formData).then(response=> {
+        Axios.post("http://localhost:5000/api/course/uploadtime", formData).then(response=> {
             if(response.status === 200) {
                 console.log("Success!");
             }
@@ -97,8 +97,8 @@ export default function UploadClassTime(){
     }
 
     function sendSems(){
-        if(classList) {
-            return (classList.map((option) => <option key={option.semester} value={option.semester}>
+        if(courseList) {
+            return (courseList.map((option) => <option key={option.semester} value={option.semester}>
             Semester {option.semester}
           </option>));
         } else {
@@ -106,10 +106,10 @@ export default function UploadClassTime(){
         }
     }
 
-    function sendSecs(){
-        if(classList) {
-            return (classList.map((option) => <option key={option.section} value={option.section}>
-            Section {option.section}
+    function sendProfs(){
+        if(courseList) {
+            return (courseList.map((option) => <option key={option.profName} value={option.profName}>
+            {option.profName}
           </option>));
         } else {
             return "Bruh";
@@ -128,15 +128,15 @@ export default function UploadClassTime(){
         whichSem(event.target.value);
     }
 
-    function handleSec(event){
-        whichSec(event.target.value);
+    function handleProf(event){
+        whichProf(event.target.value);
     }
 
-    function handleClass(){
+    function handleCourse(){
 
-        classList.forEach(function(one){
-            if(one.semester === semester && one.section === section) {
-                whichClass(one._id);
+        courseList.forEach(function(one){
+            if(one.semester === semester && one.profName === whichProf) {
+                whichCourse(one._id);
             }
         });
     }
@@ -152,7 +152,7 @@ export default function UploadClassTime(){
     return (<div className={classes.body}>
         <div className={classes.block}>
             <div className={classes.heading}>            
-                <h3>Upload Time Table for Class:</h3>
+                <h3>Upload Time Table for Course:</h3>
             </div>
             <form className={classes.root} noValidate autoComplete="off">
             <div>
@@ -168,15 +168,15 @@ export default function UploadClassTime(){
                 {sendSems()}
                 </TextField>
                 <TextField
-                id="outlined-select-section"
+                id="outlined-select-faculty"
                 select
                 label="Select"
-                value={section}
-                onChange={handleSec}
-                helperText="Please select the section"
+                value={whichProf}
+                onChange={handleProf}
+                helperText="Please select the faculty member"
                 variant="outlined"
                 >
-                {sendSecs()}
+                {sendProfs()}
                 </TextField>
             </div>
             </form>
