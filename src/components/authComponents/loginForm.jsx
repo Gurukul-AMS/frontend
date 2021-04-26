@@ -37,14 +37,13 @@ export default function Form(props) {
   const [open, setOpen] = useState(false);
 
   const [info, updateInfo] = useState({
-    role: String,
     username: String,
     password: String
   });
 
   function sendRequest() {
 
-    axios.post(`http://localhost:5000/api/login`, querystring.stringify({role: props.role, username: info.username, password: info.password}), {
+    axios.post(`http://localhost:5000/api/login`, querystring.stringify({username: info.username, password: info.password}), {
       headers: {
         'content-type': 'application/x-www-form-urlencoded;charset=utf-8'
       },

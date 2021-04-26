@@ -83,9 +83,7 @@ export default function FullWidthTabs() {
             aria-label="full width tabs example"
             centered
           >
-            <Tab label="Student" {...a11yProps(0)} />
-            <Tab label="Faculty" {...a11yProps(1)} />
-            <Tab label="Admin" {...a11yProps(2)} />
+            <Tab label="Login" {...a11yProps(0)} />
           </Tabs>
         </AppBar>
         <SwipeableViews
@@ -94,13 +92,7 @@ export default function FullWidthTabs() {
           onChangeIndex={handleChangeIndex}
         >
           <TabPanel value={value} index={0} dir={theme.direction}>
-            <Form role="Student"/>
-          </TabPanel>
-          <TabPanel value={value} index={1} dir={theme.direction}>
-            <Form role="Faculty"/>
-          </TabPanel>
-          <TabPanel value={value} index={2} dir={theme.direction}>
-            <Form role="Admin"/>
+            <Form/>
           </TabPanel>
         </SwipeableViews>
         

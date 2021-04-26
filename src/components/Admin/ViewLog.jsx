@@ -28,6 +28,7 @@ function ViewLog(props) {
       // console.log(logs);
     });
 
+
     if(props.loggedInStatues === "NOT_LOGGED_IN")
       return <Logout/>
     else if(props.currentUser !== "Admin")

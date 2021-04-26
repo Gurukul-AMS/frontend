@@ -28,6 +28,7 @@ import ViewNotifs from "./components/Notifications/ViewNotifs";
 import MakeNotif from "./components/makeNotif";
 import UpdatePic from "./components/UpdatePic";
 import UploadThesis from "./components/Student/UploadThesis";
+import UploadClassTime from "./components/Admin/UploadClassTime";
 import {BrowserRouter as Router, Route, StaticRouter, Switch} from 'react-router-dom';
 import './home.css';
 import axios from 'axios';
@@ -143,6 +144,12 @@ function App() {
             <Route exact
             path="/admin/users"
             component={AllUsers}
+          />}
+          {state.user === "Admin"
+            &&
+            <Route exact
+            path="/admin/uploadclasstime"
+            component={UploadClassTime}
           />}
           {state.user === "Faculty"
             &&

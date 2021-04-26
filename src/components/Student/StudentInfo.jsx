@@ -88,7 +88,7 @@ export default function Info(props){
   const classes = useStyles();
 
   const [profile, updateProfile] = useState({});
-  const [whichClass, updateClass] = useState();
+  const [whichClass, updateClass] = useState([]);
 
   function getClass(){
     Axios.get("http://localhost:5000/api/getclasses", {withCredentials: true}).then(response => {
@@ -119,19 +119,22 @@ export default function Info(props){
 
   useEffect(() => {
     checkLogin();
+    getClass();
   });
 
   function sendSem() {
-    if(whichClass) {
-      return whichClass[0].semester;
+    if(whichClass.length!==0) {
+      var thisClass = whichClass[0];
+      return thisClass.semester;
     } else {
       return "None";
     }
   }
 
   function sendSec() {
-    if(whichClass) {
-      return whichClass[0].section;
+    if(whichClass.length!==0) {
+      var thisClass = whichClass[0];
+      return thisClass.section;
     } else {
       return "None";
     }
