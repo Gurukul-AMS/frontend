@@ -88,12 +88,14 @@ export default function Info(props){
   const classes = useStyles();
 
   const [profile, updateProfile] = useState({});
+  const [pic, whichPic] = useState();
   const [whichClass, updateClass] = useState([]);
 
   function getClass(){
     Axios.get("http://localhost:5000/api/getclasses", {withCredentials: true}).then(response => {
       if(response.status === 200) {
         updateClass(response.data);
+        whichPic(response.data.profilePic.data);
       }
     })
     .catch(error => {
@@ -105,7 +107,7 @@ export default function Info(props){
     
     Axios.get("http://localhost:5000/api/profile", {withCredentials: true}).then(response => {
       if(response.status === 200 && props.showThis === "LOGGED_IN") {
-        //console.log(response.data);
+        // console.log(response.data);
         updateProfile(response.data);
         getClass();
       } else if(props.showThis === "NOT_LOGGED_IN") {
@@ -140,6 +142,17 @@ export default function Info(props){
     }
   }
 
+  function getPic() {
+
+    // console.log(pic);
+
+    if(pic) {
+      return pic;
+    } else {
+      return "";
+    }
+  }
+
   return (<div className={classes.body}>
     <div className={classes.root}>
       <div className={classes.h1}>
@@ -148,7 +161,7 @@ export default function Info(props){
       <div className={classes.basic}>
         <div className={classes.dp}>
           <span>
-            <img alt="profile pic" src={profile.profilePic}/>
+            <img alt="profile pic" src={getPic()}/>
           </span>
         </div>
         <div className={classes.username}>

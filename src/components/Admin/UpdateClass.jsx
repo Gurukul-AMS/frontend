@@ -183,7 +183,7 @@ export default function UpdateClass() {
                 </Button>
                 <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
                     <Alert onClose={handleClose} severity="success">
-                        Notification Sent!
+                        Class Updated!
                     </Alert>
                 </Snackbar>
             </div>

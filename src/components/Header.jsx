@@ -374,7 +374,7 @@ export default function Header(props){
       <Navbar.Collapse id="responsive-navbar-nav">
       <Nav className="mr-auto">
           <Nav.Link href="/calendar">Calendar</Nav.Link>
-          <Nav.Link href="compose">Time Table</Nav.Link>
+          <Nav.Link href="/timetable">Time Table</Nav.Link>
           <Nav.Link href={profilePage()}>Profile</Nav.Link>
       </Nav>
       {hereDrawer()}

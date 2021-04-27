@@ -41,7 +41,8 @@ export default function Calendar() {
 
         axios.get("http://localhost:5000/api/viewtime", {withCredentials: true}).then(response => {
             if(response.status === 200) {
-                updateTime(response.data.calendar.data);
+                console.log(response.data.timeTable);
+                updateTime(response.data.timeTable.data);
             }
         })
         .catch(err => {

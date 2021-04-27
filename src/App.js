@@ -41,6 +41,7 @@ function App() {
   const [state, changeState] = useState({
     loggedInStatus: "NOT_LOGGED_IN",
     user: "",
+    pic: ""
   });
 
   function checkLoginStatus(){
@@ -48,7 +49,8 @@ function App() {
       if(response.data && state.loggedInStatus === "NOT_LOGGED_IN"){
         changeState({
           loggedInStatus: "LOGGED_IN",
-          user: response.data.role
+          user: response.data.role,
+          pic: response.data.profilePic.data
         });
         // console.log(response);
       } else if(!response.data && state.loggedInStatus === "LOGGED_IN") {
@@ -75,7 +77,7 @@ function App() {
 
     <Router>
       <header className="App-header" >
-      <div class="top"><Header showThis = {state.loggedInStatus} currentUser={state.user} className="top"/></div>
+      <div class="top"><Header showThis = {state.loggedInStatus} currentUser={state.user} className="top" photo={state.pic}/></div>
         <Switch>
           <Route exact 
             path="/"
