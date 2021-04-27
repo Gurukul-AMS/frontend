@@ -30,6 +30,7 @@ import UpdatePic from "./components/UpdatePic";
 import UploadThesis from "./components/Student/UploadThesis";
 import UploadClassTime from "./components/Admin/UploadClassTime";
 import UploadCourseTime from "./components/Admin/UploadCourseTime";
+import UpdateUser from "./components/Admin/UpdateUser";
 import ViewTime from "./components/ViewTime";
 import {BrowserRouter as Router, Route, StaticRouter, Switch} from 'react-router-dom';
 import './home.css';
@@ -50,7 +51,7 @@ function App() {
         changeState({
           loggedInStatus: "LOGGED_IN",
           user: response.data.role,
-          pic: response.data.profilePic.data
+          pic: response.data.profilePic
         });
         // console.log(response);
       } else if(!response.data && state.loggedInStatus === "LOGGED_IN") {
@@ -161,7 +162,13 @@ function App() {
             <Route exact
             path="/admin/course/uploadtime"
             component={UploadCourseTime}
-          />}          
+          />}        
+          {state.user === "Admin"
+            &&
+            <Route exact
+            path="/admin/updateuser"
+            component={UpdateUser}
+          />}              
           {state.user === "Faculty"
             &&
             <Route exact
