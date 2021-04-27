@@ -109,7 +109,7 @@ export default function MultilineTextFields() {
         credentials: 'include',
         withCredentials: true
     }).then(response=>{
-          if(response.status===200) {
+          if(response.data === 200) {
               console.log("Class added!");
           }
       })

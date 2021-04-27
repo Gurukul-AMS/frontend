@@ -11,7 +11,7 @@ const useStyles = makeStyles({
         maxWidth: '100%',
         overflow: 'hidden',
         objectFit: 'fill',
-        height: '200rem'
+        height: '300rem'
     },
 
     container: {
