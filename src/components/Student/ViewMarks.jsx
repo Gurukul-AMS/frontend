@@ -41,6 +41,7 @@ export default function ViewMarks() {
         Axios.get("http://localhost:5000/api/viewmarks", {withCredentials: true}).then(response => {
             if(response.status === 200) {
                 setMarks(response.data);
+                // console.log(response.data);
             };
         })
         .catch(error => {

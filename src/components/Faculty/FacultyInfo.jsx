@@ -4,96 +4,86 @@ import {makeStyles} from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles({
-  overall: {
-    backgroundColor: '#301b3f',
-    objectFit: 'fill',
-    overflow: 'hidden',
-    height: '100vh',
-  },
 
-  title: {
-    display: 'flex',
-    alignContent: 'center',
-    flexBasis: '500px',
- 
-  },
+    body: {
+      backgroundColor: '#2b2e4a',
+      backgroundSize: 'cover',
+      maxWidth: '100%',
+      overflow: 'hidden',
+      objectFit: 'fill',
+      height: '100vh'
+    },
 
-  balance: {
-    flex: '1 0 auto',
-  },
+    root: {
+      border: '2px solid black',
+      width: '75%',
+      margin: '50px auto 80px auto',
+      paddingBottom: '50px',
+      borderRadius: '2%',
+      backgroundColor: 'white',
+      boxShadow: '25px 25px 1px #301b3f',
+    },
 
-  role: {
-    margin: '50px auto',
-    backgroundColor: 'white',
-    flex: '1 0 auto',
-    textAlign: 'center',
-    paddingTop: '25px',
-    fontSize: '3rem',
-    fontFamily: "'Georgia', serif",
-    border: '2px solid black',
-    boxShadow: '10px 10px 10px black',
-  },
+    h1: {
+      textAlign: 'center',
+      paddingTop: '50px',
+    },
 
-  button: {
-    flex: '1 0 auto',
-    alignContent: 'center', 
-    textAlign: 'center',
-    margin: '50px auto',
-    paddingTop: '30px',
-  },
+    basic: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      margin: '50px auto auto auto',
+    },
 
-  topRow: {
-    display: 'flex',
-  },
+    dp: {
+      flex: '1',
+      margin: '20px auto auto auto',
+      textAlign: 'center'
+    },
 
-  profilePic: {
-    flex: '1',
-    backgroundColor: 'white',
-    borderRadius: '10%',
-    margin: '20px 50px',
-    textAlign: 'center',
-    paddingTop: '30px',
-    paddingBottom: '30px',
-    border: '2px solid black',
-    boxShadow: '10px 10px 10px black',
+    username: {
+      flex: '1',
+      textAlign: 'center',
+    },
 
-  },
+    actualName: {
+      flex: '1',
+      textAlign: 'center',
+    },
+    
+    other: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      margin: '50px auto auto auto',
+    },
 
-  username: {
-    flex: '2',
-    backgroundColor: 'white',
-    // borderRadius: '10%',
-    margin: '30px 50px',
-    border: '2px solid black',
-    boxShadow: '10px 10px 10px black',
-  },
+    email: {
+      flex: '1',
+      textAlign: 'center',
+      border: '2px solid black',
+      paddingTop: '15px',
+      marginLeft: '15px',
+      marginRight: '15px',
+      borderRadius: '2%',
+    },
 
-  fullname: {
-    flex: '2',
-    backgroundColor: 'white',
-    // borderRadius: '10%',
-    margin: '30px 50px',
-    border: '2px solid black',
-    boxShadow: '10px 10px 10px black',
-  },
-  pic: {
-    height: '10rem',
-    width: '10rem',
-  },
+    courses: {
+      flex: '1',
+      textAlign: 'center',
+      display: 'flex',
+      flexDirection: 'column',
+      border: '2px solid black',
+      paddingTop: '15px',
+      marginRight: '15px',
+      marginLeft: '15px',
+      borderRadius: '2%',
 
-  h5: {
-    margin: '30px',
-  },
-  h3: {
-    margin: '30px',
-  },
+    },
 
-  midRow: {
-    display: 'flex',
-  },
-
-
-
+    button: {
+      textAlign: 'center',
+      margin: '30px auto 30px auto',
+    },
 });
 
 export default function Info(props){
@@ -102,12 +92,14 @@ export default function Info(props){
 
   const [profile, updateProfile] = useState({});
   const [courses, updateCourses] = useState([]);
+  const [pic, whichPic] = useState();
 
   function checkLogin(){
     Axios.get("http://localhost:5000/api/profile", {withCredentials: true}).then(response => {
       if(response.status === 200 && props.showThis === "LOGGED_IN") {
         // console.log(response);
         updateProfile(response.data);
+        // whichPic(response.data.profilePic.data);
       } else if(props.showThis === "NOT_LOGGED_IN") {
         window.location = `/logout`;   
       }
@@ -129,47 +121,70 @@ export default function Info(props){
     });
   }
 
+  function courseList() {
+
+    if(courses) {
+      return (courses.map((course) => <div>
+        <h4>{course.courseName}</h4>
+      </div>));
+    } else {
+      return "Oops";
+    }
+  }
+
+  function getPic() {
+
+    // console.log(pic);
+
+    if(pic) {
+      return pic;
+    } else {
+      return "";
+    }
+  }
+
   useEffect(() => {
     checkLogin();
     getCourses();
   });
 
-  return (<div className={classes.overall}>
-      <div className={classes.title}>
-        <div className={classes.balance}>
-
+  return (<div className={classes.body}>
+    <div className={classes.root}>
+      <div className={classes.h1}>
+        <h1>Student Profile</h1>
+      </div>
+      <div className={classes.basic}>
+        <div className={classes.dp}>
+          <span>
+            <img alt="profile pic" src={getPic()}/>
+          </span>
         </div>
-        <div className={classes.role}>
-          <p>Faculty</p>
+        <div className={classes.username}>
+          <h4>Username</h4>
+          <h3>{profile.username}</h3>
         </div>
-        <div className={classes.button}>
-          <Button size="large" variant="contained" color="primary" href="/faculty/edit">Edit</Button>
+        <div className={classes.actualName}>
+          <h4>Full Name</h4>
+          <h3>{profile.firstName + " " + profile.lastName}</h3>
         </div>
       </div>
-    <div className={classes.topRow}>
-        <div className={classes.profilePic}>
-            <img className={classes.pic} alt="Your Profile" src="../img/image.png"/>
+      <div className={classes.other}>
+        <div className={classes.email}>
+          <h4>Email</h4>
+          <h3>{profile.email + ""}</h3>
         </div>
-        <div className={classes.username}>
-            <h5 className={classes.h5}>Username:</h5> 
-            <h3 className={classes.h3}>{profile.username}</h3>
+        <div className={classes.courses}>
+          <h4>Courses</h4>
+          <h3>{courseList()}</h3>
         </div>
-        <div className={classes.fullname}>
-            <h5 className={classes.h5}>Full Name:</h5> 
-            <h3 className={classes.h3}>{profile.firstName+ " " + profile.lastName}</h3>
-        </div>
-    </div>
-    <div className={classes.topRow}>
-        <div className={classes.username}>
-            <h5 className={classes.h5}>Email: </h5>
-            <h3 className={classes.h3}>{profile.email}</h3>
-        </div>
-        <div>
-          <h5 className={classes.h5}>Courses: </h5>
-          {courses.map((course) => (
-            <h3>{course.courseName}</h3>
-          ))}
-        </div>
+      </div>
+      <div className={classes.button}>
+        <a href="/student/edit">
+          <Button variant="contained" color="primary">
+            Edit Profile
+          </Button>
+        </a>
+      </div>
     </div>
   </div>);
 };
