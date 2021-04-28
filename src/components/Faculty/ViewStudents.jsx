@@ -5,6 +5,7 @@ import querystring from 'querystring';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
+import StudentCard from './StudentCard';
 
 const useStyles = makeStyles((theme) => ({
 
@@ -37,8 +38,30 @@ const useStyles = makeStyles((theme) => ({
     },
 
     intricacy: {
-        margin: '30px auto auto 30px',
+        margin: '40px 40px auto 40px',
         textAlign: 'center',
+    },
+
+    button: {
+        textAlign: 'center',
+    },
+
+    list: {
+        display: 'flex',
+        flexDirection: 'column',
+    },
+
+    course: {
+        textAlign: 'center',
+        margin: '20px auto 20px auto',
+
+    },
+
+    students: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        textAlign: 'center',
+        float: 'left'
     }
 
 
@@ -104,9 +127,22 @@ export default function AllStudents(){
 
     function courseTitle() {
         if(course) {
-            return "Course Name: " + course;
+            return course;
         } else {
             return "No course selected yet";
+        }
+    }
+
+    function showStudents() {
+        if(studList) {
+            return (studList.map((stud) => <StudentCard
+                pic={stud.profilePic}
+                user={stud.username}
+                name={stud.firstName + ' ' + stud.lastName}
+                email={stud.email}
+            />));
+        } else {
+            return "No students selected yet";
         }
     }
 
@@ -154,18 +190,18 @@ export default function AllStudents(){
                         </TextField>
                     </div>
                 </form>
-                <div>
+                <div className={classes.button}>
                     <Button variant="contained" color="primary" onClick={getStudents}>
                         View Students
                     </Button>
                 </div>
             </div>
-            <div>
-                <div>
+            <div className={classes.list}>
+                <div className={classes.course}>
                     <h5>{courseTitle()}</h5>
                 </div>
-                <div>
-                    {}
+                <div className={classes.students}>
+                    {showStudents()}
                 </div>
             </div>
         </div>
