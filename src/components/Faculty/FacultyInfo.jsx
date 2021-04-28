@@ -38,7 +38,8 @@ const useStyles = makeStyles({
     dp: {
       flex: '1',
       margin: '20px auto auto auto',
-      textAlign: 'center'
+      width: '25%',
+      height: '25%'
     },
 
     username: {
@@ -99,7 +100,7 @@ export default function Info(props){
       if(response.status === 200 && props.showThis === "LOGGED_IN") {
         // console.log(response);
         updateProfile(response.data);
-        // whichPic(response.data.profilePic.data);
+        whichPic(response.data.profilePic.data);
       } else if(props.showThis === "NOT_LOGGED_IN") {
         window.location = `/logout`;   
       }
@@ -151,12 +152,12 @@ export default function Info(props){
   return (<div className={classes.body}>
     <div className={classes.root}>
       <div className={classes.h1}>
-        <h1>Student Profile</h1>
+        <h1>Faculty Profile</h1>
       </div>
       <div className={classes.basic}>
         <div className={classes.dp}>
           <span>
-            <img alt="profile pic" src={getPic()}/>
+            <img alt="profile pic" src="./display_images/b67978f7-e998-49b8-a574-6253b3a5483a.jpg"/>
           </span>
         </div>
         <div className={classes.username}>
@@ -179,7 +180,7 @@ export default function Info(props){
         </div>
       </div>
       <div className={classes.button}>
-        <a href="/student/edit">
+        <a href="/faculty/edit">
           <Button variant="contained" color="primary">
             Edit Profile
           </Button>
