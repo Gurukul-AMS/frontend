@@ -1,7 +1,8 @@
 import {React, useEffect, useState} from 'react';
 import Axios from 'axios';
 import {makeStyles} from '@material-ui/core/styles';
-import Attendance from "./Attendance";
+import PresentCard from "./PresentCard";
+import AbsentCard from "./AbsentCard";
 
 const useStyles = makeStyles({
     body: {
@@ -34,24 +35,32 @@ const useStyles = makeStyles({
 export default function ViewMarks() {
 
     const classes = useStyles();
-    const [attendance, setAttend] = useState([]);
+    const [present, setPresent] = useState([]);
+    const [absent, setAbsent] = useState([]);
 
-    function getMarks(){
+    function getAttend(){
         
-        Axios.get("http://localhost:5000/api/viewattend", {withCredentials: true}).then(response => {
+        Axios.get("http://localhost:5000/api/viewpresent", {withCredentials: true}).then(response => {
             if(response.status === 200) {
-                setAttend(response.data);
+                setPresent(response.data);
                 // console.log(response.data);
             };
         })
         .catch(error => {
             console.log(error);
         });
+
+        Axios.get("http://localhost:5000/api/viewabsent", {withCredentials: true}).then(response => {
+            if(response.status === 200) {
+                setAbsent(response.data);
+                // console.log(response.data);
+            }
+        })
     };
 
-    function showAttend() {
-        if(attendance) {
-            return (attendance.map((record) => <Attendance
+    function showPresent() {
+        if(present) {
+            return (present.map((record) => <PresentCard
                 course = {record.course}
                 date = {record.date}
             />));
@@ -60,14 +69,28 @@ export default function ViewMarks() {
         }
     };
 
+    function showAbsent() {
+        if(absent) {
+            return (absent.map((record) => <AbsentCard
+                course = {record.course}
+                date = {record.date}
+            />));
+        } else {
+            return "Oops";
+        }
+    }
+
     useEffect(() => {
-        getMarks();
+        getAttend();
     });
 
     return (<div className={classes.body}>
             <h1 className={classes.heading}>Attendance</h1>
             <div className={classes.root}>
-                {showAttend()}
+                {showPresent()}
+            </div>
+            <div className={classes.root}>
+                {showAbsent()}
             </div>
     </div>);
 };

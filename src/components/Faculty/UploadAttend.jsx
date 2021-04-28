@@ -83,7 +83,9 @@ export default function UploadAttend(){
     });
     const [studList, updateList] = useState([]);
     const [middle, changeMiddle] = useState({});
+    const [upper, changeUpper] = useState({});
     const [present, updatePresent] = useState([]);
+    const [absent, updateAbsent] = useState([]);
 
     function getCourses() {
 
@@ -108,7 +110,7 @@ export default function UploadAttend(){
         setOpen(true);
         console.log("This is working");
 
-        axios.post("http://localhost:5000/api/addattend", querystring.stringify({course: whichCourse, semester: info.semester, section: info.section, studentList: present}), {
+        axios.post("http://localhost:5000/api/addattend", querystring.stringify({course: whichCourse, semester: info.semester, section: info.section, presentList: present, absentList: absent}), {
             headers: {
                 'content-type': 'application/x-www-form-urlencoded;charset=utf-8'
             },
@@ -128,12 +130,25 @@ export default function UploadAttend(){
         </MenuItem>));
     }
 
-    function studentOptions() {
+    function presentOptions() {
         getCourses();
 
         if(studList) {
             return (studList.map((student) => <FormControlLabel
-                control={<Checkbox checked = {middle[student]} onChange = {handleChange} value = {student} />}
+                control={<Checkbox checked = {middle[student]} onChange = {handlePresent} value = {student} />}
+                label={student}
+            />));
+        } else {
+            return "Choose the course.";
+        }
+    };
+
+    function absentOptions() {
+        getCourses();
+
+        if(studList) {
+            return (studList.map((student) => <FormControlLabel
+                control={<Checkbox checked = {upper[student]} onChange = {handleAbsent} value = {student} />}
                 label={student}
             />));
         } else {
@@ -175,10 +190,17 @@ export default function UploadAttend(){
         setOpen(false);
     };
 
-    const handleChange = (event) => {
+    const handlePresent = (event) => {
         updatePresent([...present, event.target.value]);
         console.log(present);
-        middle[event.target.value] = true;
+        middle[event.target.value] = !middle[event.target.value];
+        
+    };
+
+    const handleAbsent = (event) => {
+        updateAbsent([...absent, event.target.value]);
+        console.log(absent);
+        upper[event.target.value] = true;
         
     };
 
@@ -207,7 +229,13 @@ export default function UploadAttend(){
             <FormControl component="fieldset" className={classes.formControl}>
                 <FormLabel component="legend">Who's here?</FormLabel>
                 <FormGroup>
-                    {studentOptions()}
+                    {presentOptions()}
+                </FormGroup>
+            </FormControl>
+            <FormControl component="fieldset" className={classes.formControl}>
+                <FormLabel component="legend">Who isn't here?</FormLabel>
+                <FormGroup>
+                    {absentOptions()}
                 </FormGroup>
             </FormControl>
         </div>
