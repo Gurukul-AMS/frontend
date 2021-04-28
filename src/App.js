@@ -1,5 +1,4 @@
 import {React, useState, useEffect } from "react";
-import ReactDOM from 'react-dom';
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Login from "./components/authComponents/Login";
@@ -31,8 +30,9 @@ import UploadThesis from "./components/Student/UploadThesis";
 import UploadClassTime from "./components/Admin/UploadClassTime";
 import UploadCourseTime from "./components/Admin/UploadCourseTime";
 import UpdateUser from "./components/Admin/UpdateUser";
+import ViewStudents from "./components/Faculty/ViewStudents";
 import ViewTime from "./components/ViewTime";
-import {BrowserRouter as Router, Route, StaticRouter, Switch} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import './home.css';
 import axios from 'axios';
 import SERVER_URL from '../src/utils/backend';
@@ -186,6 +186,12 @@ function App() {
             <Route exact
             path="/faculty/edit"
             component={EditFacultyProfile}
+          />}
+          {state.user === "Faculty"
+            &&
+            <Route exact
+            path="/faculty/viewstudents"
+            component={ViewStudents}
           />}
           {(state.user === "Faculty" || state.user === "Admin")
             &&
