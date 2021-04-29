@@ -32,6 +32,7 @@ import UploadCourseTime from "./components/Admin/UploadCourseTime";
 import UpdateUser from "./components/Admin/UpdateUser";
 import ViewStudents from "./components/Faculty/ViewStudents";
 import ViewTime from "./components/ViewTime";
+import ViewUsers from "./components/Admin/ViewUsers";
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import './home.css';
 import axios from 'axios';
@@ -168,7 +169,13 @@ function App() {
             <Route exact
             path="/admin/updateuser"
             component={UpdateUser}
-          />}              
+          />}   
+          {state.user === "Admin"
+            &&
+            <Route exact
+            path="/admin/viewusers"
+            component={ViewUsers}
+          />}             
           {state.user === "Faculty"
             &&
             <Route exact

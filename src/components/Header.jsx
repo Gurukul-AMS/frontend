@@ -238,7 +238,7 @@ export default function Header(props){
         if(index === 0) {
           return "/notifs";
         } else if(index === 1) {
-          return "/admin/users";
+          return "/admin/viewusers";
         } else if(index === 2) {
           return "/admin/logs";
         }
@@ -246,7 +246,7 @@ export default function Header(props){
         if(index === 0) {
           return "/notifs";
         } else if(index === 1) {
-          return "/sendnotif";
+          return "/faculty/viewstudents";
         }
       } else if(props.currentUser === "Student") {
         if(index === 0) {
