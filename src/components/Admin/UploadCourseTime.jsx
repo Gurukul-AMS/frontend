@@ -192,7 +192,7 @@ export default function UploadClassTime(){
             <div className={classes.buttons}>
                 <label htmlFor="contained-button-file">
                     <Button variant="contained" color="primary" component="span" >
-                        Choose Calendar
+                        Choose Time Table
                     </Button>
                 </label>
                 <div>
@@ -201,7 +201,7 @@ export default function UploadClassTime(){
                     </Button>
                     <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
                         <Alert onClose={handleClose} severity="success">
-                            Calendar Uploaded!
+                            Time Table Uploaded!
                         </Alert>
                     </Snackbar>                    
                 </div>
