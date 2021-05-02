@@ -12,7 +12,8 @@ function ViewLog(props) {
     function getData(){
       axios.get("http://localhost:5000/api/logs", {withCredentials: true}).then(response => {
         if(response.status === 200){
-            changeLog(response.data);
+            var reverse = response.data.reverse();
+            changeLog(reverse);
         } else if(response.status !== 200) {
             console.log(response);
         }

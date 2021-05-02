@@ -44,7 +44,8 @@ export default function ViewNotifs(){
     function getNotifs(){
         axios.get("http://localhost:5000/api/notifs", {withCredentials: true}).then(response=>{
             if(response.status === 200) {
-                updateNotifs(response.data);
+                var reverse = response.data.reverse();
+                updateNotifs(reverse);
             }
         })
         .catch(error => {
