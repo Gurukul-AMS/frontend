@@ -28,6 +28,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import NoteAddIcon from '@material-ui/icons/NoteAdd';
 import PostAddIcon from '@material-ui/icons/PostAdd';
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
+import UpdateIcon from '@material-ui/icons/Update';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -99,6 +100,8 @@ export default function Header(props){
           return <NoteAddIcon/>;
         } else if(index === 5) {
           return <PostAddIcon/>;
+        } else if(index === 6) {
+          return <UpdateIcon/>;
         }
       } else if(props.currentUser === "Faculty") {
         if(index === 0) {
@@ -139,6 +142,8 @@ export default function Header(props){
           return "/admin/updateclass";
         } else if(index === 5) {
           return "/admin/updatecourse";
+        } else if(index === 6) {
+          return "/admin/updateuser";
         }
       } else if(props.currentUser === "Faculty") {
         if(index === 0) {
@@ -169,7 +174,7 @@ export default function Header(props){
       
       if(props.currentUser === "Admin") {
         return <List>
-        {['Add Class', 'Add Course', 'Send Notification', 'Upload Calendar', 'Update Class', 'Update Course'].map((text, index) => (
+        {['Add Class', 'Add Course', 'Send Notification', 'Upload Calendar', 'Update Class', 'Update Course', 'Update User'].map((text, index) => (
           <ListItem button key={text}>
             <a href={upperLink(index)}>
             <ListItemIcon>{upperIcon(index)}</ListItemIcon>

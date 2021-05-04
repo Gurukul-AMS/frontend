@@ -20,7 +20,7 @@ export default function Log(props){
   return (<div className="card">
      <dt>
       <span className="action" role="img">
-        <img className="action" alt={alt} src = {source}/>
+        <img className="action" alt={"None"} src = {source}/>
       </span>
     </dt>
     <h5>Date: {props.date}</h5>

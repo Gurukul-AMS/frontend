@@ -83,7 +83,7 @@ export default function SendCourse() {
     }
 
     function courseOptions() {
-        return (courses.map((course) => <MenuItem key={course._id} value={course._id}>
+        return (courses.map((course) => <MenuItem key={course.courseName} value={course.courseName}>
         {course.courseName}
       </MenuItem>))
     }

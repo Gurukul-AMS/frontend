@@ -52,7 +52,7 @@ export default function Calendar() {
 
     function findTime() {
 
-        // console.log(calendar);
+        console.log(timeTable);
         if(timeTable) {
             return timeTable;
         } else {
