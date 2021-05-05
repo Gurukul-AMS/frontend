@@ -58,7 +58,7 @@ export default function ViewNotifs(){
     const [notifs, updateNotifs] = useState([{}]);
 
     function getNotifs(){
-        axios.get("http://localhost:5000/api/notifs", {withCredentials: true}).then(response=>{
+        axios.get("http://localhost:5000/api/notifs/all", {withCredentials: true}).then(response=>{
             if(response.status === 200) {
                 var reverse = response.data.reverse();
                 updateNotifs(reverse);
@@ -73,7 +73,7 @@ export default function ViewNotifs(){
         if(notifs) {
             // console.log(notifs);
             return (notifs.map((notif) => <Notification
-                show = "Unseen"
+                show = "All"
                 id = {notif._id}
                 from = {notif.from}
                 content = {notif.content}
@@ -88,13 +88,13 @@ export default function ViewNotifs(){
     });
 
     function showAll(){
-        window.location = '/notifs/all';
+        window.location = '/notifs';
     }
 
     return(<div className={classes.body}>
         <div className={classes.heading}> Notifications </div>
         <div className={classes.root}>
-            <Button variant="contained" onClick={showAll} className={classes.button}>View All</Button>
+            <Button variant="contained" onClick={showAll} className={classes.button}>View Unseen</Button>
         </div>
         <d1 className={classes.container}>
             {showNotifs()}

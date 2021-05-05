@@ -24,6 +24,7 @@ import ViewAttend from "./components/Student/ViewAttend";
 import SendCourse from "./components/Student/SendCourse";
 import SendClass from "./components/Student/SendClass";
 import ViewNotifs from "./components/Notifications/ViewNotifs";
+import AllNotifs from "./components/Notifications/AllNotifs";
 import MakeNotif from "./components/makeNotif";
 import UpdatePic from "./components/UpdatePic";
 import UploadThesis from "./components/Student/UploadThesis";
@@ -92,6 +93,7 @@ function App() {
           <Route exact path="/calendar" component={Calendar}/>
           <Route exact path="/notifs" component={ViewNotifs}/>
           <Route exact path="/timetable" component={ViewTime}/>
+          <Route exact path="/notifs/all" component={AllNotifs}/>
           {/* <Route exact path="/attendance" component={Attendance}/>
           <Route exact path="/test" component={TestCase}/> */}
           <Route exact 

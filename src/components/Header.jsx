@@ -29,6 +29,7 @@ import NoteAddIcon from '@material-ui/icons/NoteAdd';
 import PostAddIcon from '@material-ui/icons/PostAdd';
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import UpdateIcon from '@material-ui/icons/Update';
+import { FileCopy } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -124,6 +125,8 @@ export default function Header(props){
           return <AddBoxIcon/>;
         } else if(index === 3){
           return <AddAPhotoIcon/>;
+        } else if(index === 4){
+          return <FileCopy/>;
         }
       }
     }
@@ -166,6 +169,8 @@ export default function Header(props){
           return "/student/course";
         } else if(index === 3) {
           return "/updatepic";
+        } else if(index === 4) {
+          return "/student/thesis";
         }
       }
     }
@@ -199,7 +204,7 @@ export default function Header(props){
 
       } else if (props.currentUser === "Student") {
         return <List>
-        {['Edit Profile', 'Update Class', 'Update Course', 'Upload Profile Picture'].map((text, index) => (
+        {['Edit Profile', 'Update Class', 'Update Course', 'Upload Profile Picture', 'Submit Thesis'].map((text, index) => (
           <ListItem button key={text}>
             <a href={upperLink(index)}>
             <ListItemIcon>{upperIcon(index)}</ListItemIcon>
