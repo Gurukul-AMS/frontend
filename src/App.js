@@ -14,7 +14,6 @@ import Calendar from "./components/Calendar";
 import UploadCal from "./components/Admin/uploadCalendar";
 import AddClass from "./components/Admin/AddClass";
 import AddCourse from "./components/Admin/AddCourse";
-import AllUsers from "./components/Admin/AllUsers";
 import UpdateClass from "./components/Admin/UpdateClass";
 import UpdateCourse from "./components/Admin/UpdateCourse";
 import SendAlert from "./components/Admin/SendAlert";
@@ -148,12 +147,6 @@ function App() {
             <Route exact
             path="/admin/course"
             component={AddCourse}
-          />}
-          {state.user === "Admin"
-            &&
-            <Route exact
-            path="/admin/users"
-            component={AllUsers}
           />}
           {state.user === "Admin"
             &&

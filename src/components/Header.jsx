@@ -387,6 +387,14 @@ export default function Header(props){
       return "/profile/" + props.currentUser;
     }
 
+    function showPic() {
+      if(props.photo) {
+        return '/display_images/' + props.photo.data;
+      } else {
+        return ;
+      }
+    }
+
     return <Navbar collapseOnSelect variant="dark" expand="lg">
       <Navbar.Brand href="/">Gurukul</Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -404,7 +412,7 @@ export default function Header(props){
           <div className={classes.root}>
               <a href={whichLink()}>
                 <Badge badgeContent = {setNumber()} color="primary">
-                  <Avatar alt={props.currentUser} src={props.photo} />
+                  <Avatar alt={props.currentUser} src={showPic()} />
                 </Badge>
               </a>
           </div>

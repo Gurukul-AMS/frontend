@@ -6,6 +6,12 @@ import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles({
 
+  'img' : {
+    display: 'block',
+    height: '50px',
+    width: '50px'
+  },
+
   body: {
     backgroundColor: '#2b2e4a',
     backgroundSize: 'cover',
@@ -81,6 +87,11 @@ const useStyles = makeStyles({
     margin: '30px auto 30px auto',
   },
 
+  image: {
+    height: '5rem',
+    width: '5rem',
+  }
+
 });
 
 export default function Info(props){
@@ -95,7 +106,6 @@ export default function Info(props){
     Axios.get("http://localhost:5000/api/getclasses", {withCredentials: true}).then(response => {
       if(response.status === 200) {
         updateClass(response.data);
-        whichPic(response.data.profilePic.data);
       }
     })
     .catch(error => {
@@ -109,6 +119,7 @@ export default function Info(props){
       if(response.status === 200 && props.showThis === "LOGGED_IN") {
         // console.log(response.data);
         updateProfile(response.data);
+        whichPic(response.data.profilePic.data);
         getClass();
       } else if(props.showThis === "NOT_LOGGED_IN") {
         return <Logout/>
@@ -147,7 +158,7 @@ export default function Info(props){
     // console.log(pic);
 
     if(pic) {
-      return pic;
+      return '/display_images/' + pic;
     } else {
       return "";
     }
@@ -161,7 +172,7 @@ export default function Info(props){
       <div className={classes.basic}>
         <div className={classes.dp}>
           <span>
-            <img alt="profile pic" src={getPic()}/>
+            <img className={classes.image} alt="profile pic" src={getPic()}/>
           </span>
         </div>
         <div className={classes.username}>

@@ -5,21 +5,23 @@ import UserCard from './UserCard';
 
 const useStyles = makeStyles((theme) => ({
 
+    'body' : {
+        height: '100%',
+    },
+
     body: {
-        background: '#8fd9a8',
-        height:'250vh',
+        height:'100%',
         maxWidth: '100%',
         overflow: 'hidden',
         objectFit: 'fill',
+        backgroundSize: 'cover'
 
     },
 
     block: {
         backgroundColor: '#d8e3e7',
         width: '80%',
-        borderRadius: '5%',
-        margin: '50px auto auto auto',
-        boxShadow: '-15px -15px #150e56'
+        margin: '50px auto 100px auto',
     },
 
     heading: {
@@ -31,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
     list: {
         display: 'flex',
         flexDirection: 'column',
+        flexWrap: 'wrap',
     },
 
     course: {
@@ -42,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
     students: {
         display: 'flex',
         flexWrap: 'wrap',
-        textAlign: 'center',
+        justifyContent: 'center',
         float: 'left'
     }
 
@@ -70,8 +73,10 @@ export default function AllStudents(){
     function showUsers() {
         if(userList) {
             return (userList.map((user) => <UserCard
+                id={user._id}
                 pic={user.profilePic}
                 user={user.username}
+                role={user.role}
                 name={user.firstName + ' ' + user.lastName}
                 email={user.email}
             />));

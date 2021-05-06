@@ -85,6 +85,11 @@ const useStyles = makeStyles({
       textAlign: 'center',
       margin: '30px auto 30px auto',
     },
+
+    image: {
+      height: '5rem',
+      width: '5rem',
+    }
 });
 
 export default function Info(props){
@@ -138,7 +143,7 @@ export default function Info(props){
     // console.log(pic);
 
     if(pic) {
-      return pic;
+      return '/display_images/' + pic;
     } else {
       return "";
     }
@@ -157,7 +162,7 @@ export default function Info(props){
       <div className={classes.basic}>
         <div className={classes.dp}>
           <span>
-            <img alt="profile pic" src="./display_images/b67978f7-e998-49b8-a574-6253b3a5483a.jpg"/>
+            <img className={classes.image} alt="profile pic" src={getPic()}/>
           </span>
         </div>
         <div className={classes.username}>
