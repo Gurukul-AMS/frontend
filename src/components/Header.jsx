@@ -30,6 +30,7 @@ import PostAddIcon from '@material-ui/icons/PostAdd';
 import AddAPhotoIcon from '@material-ui/icons/AddAPhoto';
 import UpdateIcon from '@material-ui/icons/Update';
 import { FileCopy } from "@material-ui/icons";
+import AnnouncementIcon from '@material-ui/icons/Announcement';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -127,6 +128,8 @@ export default function Header(props){
           return <AddAPhotoIcon/>;
         } else if(index === 4){
           return <FileCopy/>;
+        } else if(index === 5){
+          return <EditIcon/>;
         }
       }
     }
@@ -171,6 +174,8 @@ export default function Header(props){
           return "/updatepic";
         } else if(index === 4) {
           return "/student/thesis";
+        } else if(index === 5) {
+          return "/sendnotif";
         }
       }
     }
@@ -204,7 +209,7 @@ export default function Header(props){
 
       } else if (props.currentUser === "Student") {
         return <List>
-        {['Edit Profile', 'Update Class', 'Update Course', 'Upload Profile Picture', 'Submit Thesis'].map((text, index) => (
+        {['Edit Profile', 'Update Class', 'Update Course', 'Upload Profile Picture', 'Submit Thesis', 'Send Notifications'].map((text, index) => (
           <ListItem button key={text}>
             <a href={upperLink(index)}>
             <ListItemIcon>{upperIcon(index)}</ListItemIcon>
@@ -224,6 +229,8 @@ export default function Header(props){
           return <GroupIcon/>;
         } else if(index === 2){
           return <ListAltIcon/>;
+        } else if(index === 3) {
+          return <AnnouncementIcon/>;
         }
       } else if(props.currentUser === "Faculty") {
         if(index === 0) {
@@ -251,6 +258,8 @@ export default function Header(props){
           return "/admin/viewusers";
         } else if(index === 2) {
           return "/admin/logs";
+        } else if(index === 3) {
+          return "/admin/sendalert";
         }
       } else if(props.currentUser === "Faculty") {
         if(index === 0) {
@@ -273,7 +282,7 @@ export default function Header(props){
 
       if(props.currentUser === "Admin") {
         return <List>
-        {['View Notifications', 'View Users', 'View Logs'].map((text, index) => (
+        {['View Notifications', 'View Users', 'View Logs', 'View Attendance'].map((text, index) => (
           <ListItem button key={text}>
             <a href={lowerLink(index)}>
             <ListItemIcon>{lowerIcon(index)}</ListItemIcon>

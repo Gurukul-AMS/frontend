@@ -17,6 +17,7 @@ import AddCourse from "./components/Admin/AddCourse";
 import AllUsers from "./components/Admin/AllUsers";
 import UpdateClass from "./components/Admin/UpdateClass";
 import UpdateCourse from "./components/Admin/UpdateCourse";
+import SendAlert from "./components/Admin/SendAlert";
 import UploadMarks from "./components/Faculty/UploadMarks";
 import UploadAttend from "./components/Faculty/UploadAttend";
 import ViewMarks from "./components/Student/ViewMarks";
@@ -177,7 +178,13 @@ function App() {
             <Route exact
             path="/admin/viewusers"
             component={ViewUsers}
-          />}             
+          />}      
+          {state.user === "Admin"
+            &&
+            <Route exact
+            path="/admin/sendalert"
+            component={SendAlert}
+          />}                   
           {state.user === "Faculty"
             &&
             <Route exact
@@ -202,7 +209,7 @@ function App() {
             path="/faculty/viewstudents"
             component={ViewStudents}
           />}
-          {(state.user === "Faculty" || state.user === "Admin")
+          {(state.user === "Faculty" || state.user === "Admin" || state.user === "Student")
             &&
             <Route exact
             path= "/sendnotif"

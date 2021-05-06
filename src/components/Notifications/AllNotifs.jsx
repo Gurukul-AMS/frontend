@@ -6,13 +6,17 @@ import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
 
-    body: {
+    'body' :{
+        height: '100%',
+    },
+
+    limbo: {
         backgroundColor: '#a3d2ca',
         backgroundSize: 'cover',
         maxWidth: '100%',
         overflow: 'hidden',
         objectFit: 'fill',
-        height: '300rem'
+        height: '100%'
     },
 
     container: {
@@ -91,7 +95,7 @@ export default function ViewNotifs(){
         window.location = '/notifs';
     }
 
-    return(<div className={classes.body}>
+    return(<div className={classes.limbo}>
         <div className={classes.heading}> Notifications </div>
         <div className={classes.root}>
             <Button variant="contained" onClick={showAll} className={classes.button}>View Unseen</Button>

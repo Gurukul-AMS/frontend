@@ -6,13 +6,17 @@ import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
 
+    'body' : {
+        height: '100vh',
+    },
+
     body: {
         backgroundColor: '#a3d2ca',
         backgroundSize: 'cover',
         maxWidth: '100%',
         overflow: 'hidden',
         objectFit: 'fill',
-        height: '300rem'
+        height: '100%'
     },
 
     container: {
@@ -49,6 +53,10 @@ const useStyles = makeStyles((theme) => ({
         },
     },
 
+    nonew: {
+        height: '50vh',
+    }
+
 }));
 
 export default function ViewNotifs(){
@@ -70,7 +78,7 @@ export default function ViewNotifs(){
     };
 
     function showNotifs(){
-        if(notifs) {
+        if(notifs.length!==0) {
             // console.log(notifs);
             return (notifs.map((notif) => <Notification
                 show = "Unseen"
@@ -79,7 +87,9 @@ export default function ViewNotifs(){
                 content = {notif.content}
             />));
         } else {
-            return "Whoops, sorry!";
+            return (<div className={classes.nonew}>
+                <h3>No new notifications!</h3>
+            </div>);
         }
     }
 
