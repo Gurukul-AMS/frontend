@@ -66,7 +66,12 @@ const useStyles = makeStyles((theme) => ({
 
     formControl: {
         margin: theme.spacing(3),
-    }
+    },
+    textField: {
+        marginLeft: theme.spacing(1),
+        marginRight: theme.spacing(1),
+        width: 200,
+    },
 
 }));
 
@@ -81,6 +86,7 @@ export default function UploadAttend(){
         semester: "",
         section: ""
     });
+    const [date, changeDate] = useState("");
     const [studList, updateList] = useState([]);
     const [middle, changeMiddle] = useState({});
     const [upper, changeUpper] = useState({});
@@ -110,7 +116,7 @@ export default function UploadAttend(){
         setOpen(true);
         console.log("This is working");
 
-        axios.post("http://localhost:5000/api/addattend", querystring.stringify({course: whichCourse, semester: info.semester, section: info.section, presentList: present, absentList: absent}), {
+        axios.post("http://localhost:5000/api/addattend", querystring.stringify({course: whichCourse, semester: info.semester, section: info.section, presentList: present, absentList: absent, date: date}), {
             headers: {
                 'content-type': 'application/x-www-form-urlencoded;charset=utf-8'
             },
@@ -204,6 +210,10 @@ export default function UploadAttend(){
         
     };
 
+    function handleDate(event) {
+        changeDate(event.target.value);
+    }
+
     return (<div className={classes.bg}>
     <div className={classes.block}>
         <form className={classes.root} noValidate autoComplete="off">
@@ -222,6 +232,17 @@ export default function UploadAttend(){
                 >
                 {courseOptions()}
                 </TextField>
+                <TextField
+                    id="date"
+                    label="Date"
+                    type="date"
+                    value={date}
+                    onChange={handleDate}
+                    className={classes.textField}
+                    InputLabelProps={{
+                    shrink: true,
+                    }}
+                />
             </div>
         
         </form>
