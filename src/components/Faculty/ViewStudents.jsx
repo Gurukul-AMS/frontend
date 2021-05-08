@@ -9,10 +9,15 @@ import StudentCard from './StudentCard';
 
 const useStyles = makeStyles((theme) => ({
 
+    'body' : {
+        height: '100vh',
+    },
+
     body: {
-        backgroundImage: 'url(https://images.unsplash.com/photo-1495482432709-15807c8b3e2b?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHw%3D&w=1000&q=80)',
-        backgroundSize: 'cover',
-        height:'100vh',
+        background: '#00416A',  /* fallback for old browsers */
+        background: '-webkit-linear-gradient(to right, #E4E5E6, #00416A)',  /* Chrome 10-25, Safari 5.1-6 */
+        background: 'linear-gradient(to bottom, #E4E5E6, #00416A)', /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */        
+        height:'100%',
         maxWidth: '100%',
         overflow: 'hidden',
         objectFit: 'fill',
@@ -29,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundColor: 'white',
         width: '80%',
         borderRadius: '5%',
-        margin: '30px auto auto auto',
+        margin: '30px auto 100px auto',
     },
 
     heading: {
@@ -60,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
     students: {
         display: 'flex',
         flexWrap: 'wrap',
-        textAlign: 'center',
+        justifyContent: 'center',
         float: 'left'
     }
 

@@ -84,6 +84,7 @@ const useStyles = makeStyles({
         width: '100px',
         backgroundColor: '#cf0000',
         color: 'white',
+        transitionDuration: '0.5s',
         '&:hover' : {
             backgroundColor: '#da7f8f',
         },
@@ -94,6 +95,7 @@ const useStyles = makeStyles({
         width: '100px',
         backgroundColor: '#206a5d',
         color: 'white',
+        transitionDuration: '0.5s',
         '&:hover' : {
             backgroundColor: '#8fd9a8',
         }

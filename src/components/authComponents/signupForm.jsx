@@ -17,6 +17,10 @@ const roles = [
     value: "Faculty",
     label: "Faculty",
   },
+  {
+    value: "Admin",
+    label: "Admin",
+  }
 ]
 
 const useStyles = makeStyles((theme) => ({
@@ -40,7 +44,7 @@ export default function FormPropsTextFields() {
 
   function sendRequest() {
 
-    axios.post(`http://localhost:5000/api/register`, querystring.stringify({role: info.role, username: info.username, password: info.password}), {
+    axios.post(`http://localhost:5000/api/register`, querystring.stringify({role: info.role, username: info.username, password: info.password, pic: 'default.jpg'}), {
       headers: {
         'content-type': 'application/x-www-form-urlencoded;charset=utf-8'
       },
@@ -50,7 +54,8 @@ export default function FormPropsTextFields() {
       if (response.status === 200) {
         localStorage.setItem('username', response.data.username)
         localStorage.setItem('newUser',"true");
-        window.location = `/profile/${response.data.role}`          
+        console.log(response.data);
+        window.location = `/login`          
       }
       console.log(response);
     });
