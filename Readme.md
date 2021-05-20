@@ -24,4 +24,4 @@ Member Name | GitHub ID
 Aaryan Bhardwaj <br> IIT2019035 | ![Aaryan](https://avatars.githubusercontent.com/u/57333555?s=96&v=4) <br> [uglyprincess](https://github.com/uglyprincess)
 Pratham Punj <br> IIT2019040 | ![Pratham](https://avatars.githubusercontent.com/u/56146599?s=96&v=4) <br> [Sensibleprat](https://github.com/Sensibleprat)
 Anirudh S <br> IIT2019068 | ![Anirudh](https://avatars.githubusercontent.com/u/58392171?s=96&v=4) <br> [anirudh2019](https://github.com/anirudh2019)
-Somesh Maurya <br> IIT2019080 | ![Somesh](https://avatars.githubusercontent.com/u/77438447?v=4) <br> [SomeshMAURYA7007](https://github.com/SomeshMAURYA7007)
+Somesh Maurya <br> IIT2019081 | ![Somesh](https://avatars.githubusercontent.com/u/77438447?v=4) <br> [SomeshMAURYA7007](https://github.com/SomeshMAURYA7007)
