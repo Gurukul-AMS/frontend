@@ -38,8 +38,7 @@ const useStyles = makeStyles({
     dp: {
       flex: '1',
       margin: '20px auto auto auto',
-      width: '25%',
-      height: '25%'
+      textAlign: 'center',
     },
 
     username: {

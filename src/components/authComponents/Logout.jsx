@@ -1,8 +1,27 @@
 import {React, useEffect} from 'react';
 import axios from 'axios';
+import {makeStyles} from '@material-ui/core/styles';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-function Logout(){
+const useStyles = makeStyles({
+
+  root: {
+    display: 'flex',
+    justifyContent: 'center',
+    backgroundSize: 'cover',
+    height:'100vh',
+    maxWidth: '90%',
+    overflow: 'hidden',
+    objectFit: 'fill',
+    margin: 'auto auto 50px auto'
+  },
+
+
+});
+
+export default function Logout(){
+
+    const classes = useStyles();
 
     function userLogout(){
         axios.get("http://localhost:5000/api/logout", {withCredentials: true}).then(response => {
@@ -21,10 +40,6 @@ function Logout(){
         userLogout();
     });
 
-    return <div>
-        <h2>You are logged out. </h2>
-
+    return <div className={classes.root} style={{backgroundImage: 'url(background/logout.jpg)'}}>
     </div>
 }
-
-export default Logout;
