@@ -1,9 +1,41 @@
-import {React, useState} from 'react';
-import Button from 'react-bootstrap/Button';
-import Jumbotron from 'react-bootstrap/Jumbotron';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import {React} from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+
+const useStyles = makeStyles({
+
+  root: {
+      display: 'flex',
+      justifyContent: 'center',
+      backgroundSize: 'cover',
+      height:'100vh',
+      maxWidth: '100%',
+      overflow: 'hidden',
+      objectFit: 'fill',
+      margin: 'auto auto 50px auto'
+
+  },
+
+  button: {
+
+    backgroundColor: '#21094e',
+    color: 'white',
+    margin: '550px auto auto auto',
+    padding: '25px 100px',
+    transitionDuration: '0.5s',
+    '&:hover' : {
+
+      backgroundColor: '#233e8b',
+      boxShadow: '5px 5px 5px grey'
+    }
+
+  }
+
+});
 
 export default function Home(props) {
+
+  const classes = useStyles();
 
     var path="";
     var value="";
@@ -28,16 +60,11 @@ export default function Home(props) {
       }
     }
 
-    return (<Jumbotron>
-        <h1>Welcome to Gurukul</h1>
-        <p>
-          Gurukul is an academic management system (AMS) built with the faculty members in mind.
-        </p>
-        <p>
-
-        </p>
-        <p>
-          <Button variant="primary" href={path}>{value}</Button>
-        </p>
-      </Jumbotron>);
+    return (<div className={classes.root} style={{backgroundImage: 'url(background/home.jpg)'}}>
+      <div>
+          <Button className={classes.button} onClick={path} variant="contained">
+              {value}
+          </Button>
+      </div>
+    </div>);
 };
