@@ -1,6 +1,6 @@
 # Gurukul AMS - Front End
 
-### Pre-Requisites
+### Pre-Requisites 
 
 Please install the following programs to be able to run this project.
 1. Click on [this link](https://nodejs.org/en/download/) to install Node.js
